@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline-style: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+}
+* {
+  scrollbar-width: none;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: middle;
+}
+
+html {
+  height: auto;
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-size: 10px;
+  font-family: "Noto Sans KR", sans-serif;
+}
