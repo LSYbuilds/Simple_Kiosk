@@ -1,5 +1,51 @@
 @charset "utf-8";
 
+/* KOHI배움 */
+@font-face {
+  font-family: "KohiLearn";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/KOHIBaeumOTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-display: swap;
+}
+/* G마켓산스 */
+@font-face {
+  font-family: "GMarketSans";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff")
+    format("woff");
+  font-weight: 300;
+  font-display: swap;
+}
+
+/* 노토산스 */
+@font-face {
+  font-family: "Noto Sans KR", sans-serif;
+  src: url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 나눔바른고딕 */
+@font-face {
+  font-family: "NanumBarunGothic";
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumBarunGothic";
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumBarunGothic";
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot");
+  font-weight: 300;
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -25,6 +71,7 @@ ul li {
 }
 
 img {
+  display: block;
   vertical-align: middle;
 }
 
@@ -34,6 +81,6 @@ html {
 }
 
 body {
-  font-size: 10px;
-  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  font-family: "NanumBarunGothic", sans-serif;
 }

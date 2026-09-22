@@ -3,7 +3,7 @@
     {
       "id": "butler",
       "name": "버틀러",
-      "src": "/bancboo/Butler.webp",
+      "src": "/bangboo/Butler.webp",
       "price": 5876000,
       "englishName": "Butler",
       "rarity": 5,
@@ -38,7 +38,7 @@
     },
     {
       "id": "safety",
-      "src": "/bancboo/Safety.webp",
+      "src": "/bangboo/Safety.webp",
       "name": "안전부",
       "price": 4809000,
       "englishName": "Safety",
@@ -74,7 +74,7 @@
     },
     {
       "id": "sharkboo",
-      "src": "/bancboo/Sharkboo.webp",
+      "src": "/bangboo/Sharkboo.webp",
       "name": "샤크부",
       "price": 4700000,
       "englishName": "Sharkboo",
@@ -110,9 +110,9 @@
     },
     {
       "id": "amillion",
-      "src": "/bancboo/Amillion.webp",
-      "name": "에밀리온",
+      "src": "/bangboo/Amillion.webp",
       "price": 2670000,
+      "name": "에밀리온",
       "englishName": "Amillion",
       "rarity": 5,
       "element": "물리",
@@ -146,9 +146,9 @@
     },
     {
       "id": "plugboo",
-      "src": "/bancboo/Plugboo.webp",
-      "name": "플러그부",
+      "src": "/bangboo/Plugboo.webp",
       "price": 6780000,
+      "name": "플러그부",
       "englishName": "Plugboo",
       "rarity": 5,
       "element": "전기",
@@ -182,9 +182,9 @@
     },
     {
       "id": "resonaboo",
-      "src": "/bancboo/Resonaboo.webp",
-      "name": "공명부",
+      "src": "/bangboo/Resonaboo.webp",
       "price": 5420000,
+      "name": "공명부",
       "englishName": "Resonaboo",
       "rarity": 5,
       "element": "에테르",
@@ -218,9 +218,9 @@
     },
     {
       "id": "officer-cui",
-      "src": "/bancboo/Officer_Cui.webp",
-      "name": "최 순찰대원",
+      "src": "/bangboo/Officer_Cui.webp",
       "price": 6780000,
+      "name": "최 순찰대원",
       "englishName": "Officer Cui",
       "rarity": 5,
       "element": "물리",
@@ -254,9 +254,9 @@
     },
     {
       "id": "red-moccus",
-      "src": "/bancboo/Red_Moccus.webp",
-      "name": "레드모쿠스",
+      "src": "/bangboo/Red_Moccus.webp",
       "price": 2370000,
+      "name": "레드모쿠스",
       "englishName": "Red Moccus",
       "rarity": 5,
       "element": "물리",
@@ -290,7 +290,7 @@
     },
     {
       "id": "agent-gulliver",
-      "src": "/bancboo/Agent_Gulliver.webp",
+      "src": "/bangboo/Agent_Gulliver.webp",
       "price": 7840000,
       "name": "걸리버요원",
       "englishName": "Agent Gulliver",
@@ -326,7 +326,7 @@
     },
     {
       "id": "snap",
-      "src": "/bancboo/Snap.webp",
+      "src": "/bangboo/Snap.webp",
       "price": 1800000,
       "name": "찰칵이",
       "englishName": "Snap",
@@ -362,7 +362,7 @@
     },
     {
       "id": "robin",
-      "src": "/bancboo/Robin.webp",
+      "src": "/bangboo/Robin.webp",
       "price": 7760000,
       "name": "로빈",
       "englishName": "Robin",
@@ -398,8 +398,9 @@
     },
     {
       "id": "belion",
+      "src": "/bangboo/Belion.webp",
+      "price": 3460000,
       "name": "사야",
-      "price": 3270000,
       "englishName": "Belion",
       "rarity": 5,
       "element": "물리",
@@ -433,8 +434,9 @@
     },
     {
       "id": "miss-esme",
+      "src": "/bangboo/Miss_Esme.webp",
+      "price": 6740000,
       "name": "에스메 양",
-      "price": 6430000,
       "englishName": "Miss Esme",
       "rarity": 5,
       "element": "물리",
@@ -468,8 +470,9 @@
     },
     {
       "id": "mercury",
-      "name": "머큐리",
+      "src": "/bangboo/Mercury.webp",
       "price": 8790000,
+      "name": "머큐리",
       "englishName": "Mercury",
       "rarity": 5,
       "element": "불",
@@ -503,8 +506,9 @@
     },
     {
       "id": "birkblick",
+      "src": "/bangboo/Birkblick.webp",
+      "price": 4550000,
       "name": "비르크블리크",
-      "price": 5430000,
       "englishName": "Birkblick",
       "rarity": 5,
       "element": "물리",
@@ -538,6 +542,8 @@
     },
     {
       "id": "biggest-fan",
+      "src": "/bangboo/BiggestFan.webp",
+      "price": 895000,
       "name": "팬팬",
       "englishName": "Biggest Fan",
       "rarity": 5,
@@ -572,11 +578,13 @@
     },
     {
       "id": "ultra-jake",
+      "src": "/bangboo/Ultra_Jake.webp",
+      "price": 7765000,
       "name": "울트라 제이크",
       "englishName": "Ultra Jake",
       "rarity": 5,
       "element": "불",
-      "faction": "로스카엘리퍼",
+      "faction": "로스캘리퍼",
       "mbti": "ESFP",
       "compatibleMbti": ["ESFP", "ESTP", "ENFP", "ENTP"],
       "tier": "Tier 0",
@@ -606,6 +614,8 @@
     },
     {
       "id": "ariel",
+      "src": "/bangboo/Ariel.webp",
+      "price": 3350000,
       "name": "아리엘",
       "englishName": "Ariel",
       "rarity": 5,
@@ -640,6 +650,8 @@
     },
     {
       "id": "rocketboo",
+      "src": "/bangboo/Rocketboo.webp",
+      "price": 4860000,
       "name": "로켓부",
       "englishName": "Rocketboo",
       "rarity": 5,
@@ -674,6 +686,8 @@
     },
     {
       "id": "bangvolver",
+      "src": "/bangboo/Bangvolver.webp",
+      "price": 6620000,
       "name": "리볼버부",
       "englishName": "Bangvolver",
       "rarity": 5,
@@ -708,6 +722,8 @@
     },
     {
       "id": "sprout",
+      "src": "/bangboo/Sprout.webp",
+      "price": 3370000,
       "name": "싹싹",
       "englishName": "Sprout",
       "rarity": 5,
@@ -742,6 +758,8 @@
     },
     {
       "id": "booltergeist",
+      "src": "/bangboo/Sprout.webp",
+      "price": 5680000,
       "name": "유령부",
       "englishName": "Booltergeist",
       "rarity": 5,
@@ -776,6 +794,8 @@
     },
     {
       "id": "bagboo",
+      "src": "/bangboo/Bagboo.webp",
+      "price": 680000,
       "name": "봉투부",
       "englishName": "Bagboo",
       "rarity": 4,
@@ -810,6 +830,8 @@
     },
     {
       "id": "avocaboo",
+      "src": "/bangboo/Avocaboo.webp",
+      "price": 600000,
       "name": "아보카부",
       "englishName": "Avocaboo",
       "rarity": 4,
@@ -844,6 +866,8 @@
     },
     {
       "id": "boolseye",
+      "src": "/bangboo/Boollseye.webp",
+      "price": 885000,
       "name": "과녁부",
       "englishName": "Boollseye",
       "rarity": 4,
@@ -878,6 +902,8 @@
     },
     {
       "id": "paperboo",
+      "src": "/bangboo/Paperboo.webp",
+      "price": 381000,
       "name": "종이부",
       "englishName": "Paperboo",
       "rarity": 4,
@@ -912,6 +938,8 @@
     },
     {
       "id": "electroboo",
+      "src": "/bangboo/Electroboo.webp",
+      "price": 568000,
       "name": "찌릿부",
       "englishName": "Electroboo",
       "rarity": 4,
@@ -946,6 +974,8 @@
     },
     {
       "id": "cryboo",
+      "src": "/bangboo/Cryboo.webp",
+      "price": 384000,
       "name": "울보부",
       "englishName": "Cryboo",
       "rarity": 4,
@@ -980,6 +1010,8 @@
     },
     {
       "id": "magnetboo",
+      "src": "/bangboo/Magnetiboo.webp",
+      "price": 390000,
       "name": "자석부",
       "englishName": "Magnetiboo",
       "rarity": 4,
@@ -1014,6 +1046,8 @@
     },
     {
       "id": "luckyboo",
+      "src": "/bangboo/Luckyboo.webp",
+      "price": 777000,
       "name": "럭키부",
       "englishName": "Luckyboo",
       "rarity": 4,
@@ -1048,6 +1082,8 @@
     },
     {
       "id": "booressure",
+      "src": "/bangboo/Booressure.webp",
+      "price": 666000,
       "name": "압력부",
       "englishName": "Booressure",
       "rarity": 4,
@@ -1082,6 +1118,8 @@
     },
     {
       "id": "penguinboo",
+      "src": "/bangboo/Penguinboo.webp",
+      "price": 457000,
       "name": "펭귄부",
       "englishName": "Penguinboo",
       "rarity": 4,
@@ -1116,6 +1154,8 @@
     },
     {
       "id": "devilboo",
+      "src": "/bangboo/Devilboo.webp",
+      "price": 457000,
       "name": "데빌부",
       "englishName": "Devilboo",
       "rarity": 4,
@@ -1150,6 +1190,8 @@
     },
     {
       "id": "exploreboo",
+      "src": "/bangboo/Exploreboo.webp",
+      "price": 320000,
       "name": "탐험부",
       "englishName": "Exploreboo",
       "rarity": 4,
@@ -1184,6 +1226,8 @@
     },
     {
       "id": "knightboo",
+      "src": "/bangboo/Knightboo.webp",
+      "price": 870000,
       "name": "기사부",
       "englishName": "Knightboo",
       "rarity": 4,
@@ -1218,6 +1262,8 @@
     },
     {
       "id": "sumoboo",
+      "src": "/bangboo/Sumoboo.webp",
+      "price": 345000,
       "name": "스모부",
       "englishName": "Sumoboo",
       "rarity": 4,
@@ -1252,6 +1298,8 @@
     },
     {
       "id": "baddieboo",
+      "src": "/bangboo/Baddieboo.webp",
+      "price": 345000,
       "name": "불량부",
       "englishName": "Baddieboo",
       "rarity": 4,
@@ -1286,6 +1334,8 @@
     },
     {
       "id": "brawlerboo",
+      "src": "/bangboo/Brawlerboo.webp",
+      "price": 650100,
       "name": "격투부",
       "englishName": "Brawlerboo",
       "rarity": 4,
@@ -1320,6 +1370,8 @@
     },
     {
       "id": "bild-n-boolok",
+      "src": "/bangboo/Boolok.webp",
+      "price": 333000,
       "name": "블록부",
       "englishName": "Bild N. Boolok",
       "rarity": 4,
@@ -1354,6 +1406,8 @@
     },
     {
       "id": "excaliboo",
+      "src": "/bangboo/Excaliboo.webp",
+      "price": 980000,
       "name": "엑스칼리부",
       "englishName": "Excaliboo",
       "rarity": 4,
@@ -1388,6 +1442,8 @@
     },
     {
       "id": "overtimeboo",
+      "src": "/bangboo/Overtimeboo.webp",
+      "price": 145000,
       "name": "야근부",
       "englishName": "Overtimeboo",
       "rarity": 4,
