@@ -1,53 +1,79 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { MainWrap, SelectedItem } from "../../style/mainstyled/main_styled";
 import booData from "../../assets/data/bandbooData.json";
 import Icon from "../../components/SvgComponents";
 import { AnimatePresence, motion } from "motion/react";
 
-const Main = (faction) => {
+const Main = ({ faction }) => {
   const [thisBoo, setThisBoo] = useState(null);
   const [sideView, setSideView] = useState(false);
   const [sort, setSort] = useState(null);
   const [sortData, setSortData] = useState(booData.bangbooList);
 
+  const saleData = booData.bangbooList.map((item) => ({
+    ...item,
+    salePrice:
+      faction.facname === "프록시" ? Math.floor(item.price * 0.8) : item.price,
+  }));
+
   // 전체 불러오기
   const allDataCall = () => {
-    setSortData(booData.bangbooList);
+    setSortData(saleData);
   };
   // 원소 필터
   const sortDataFilter = (sortName) => {
-    const filerted = booData.bangbooList.filter(
-      (item) => item.element === sortName,
-    );
+    const filerted = saleData.filter((item) => item.element === sortName);
     setSortData(filerted);
   };
   // 랭크필터
   const sortDataRankFilter = (sortRank) => {
-    const filerted = booData.bangbooList.filter(
-      (item) => item.rarity === sortRank,
-    );
+    const filerted = saleData.filter((item) => item.rarity === sortRank);
     setSortData(filerted);
   };
   // 높은가격순
   const sortDataPriceHigh = () => {
-    const filerted = [...booData.bangbooList].sort((a, b) => b.price - a.price);
+    const filerted = [...saleData].sort((a, b) => b.price - a.price);
     setSortData(filerted);
   };
   // 낮은가격순
   const sortDataPriceLow = () => {
-    const filerted = [...booData.bangbooList].sort((a, b) => a.price - b.price);
+    const filerted = [...saleData].sort((a, b) => a.price - b.price);
     setSortData(filerted);
   };
-  console.log(faction);
+  useEffect(() => {
+    setSortData(saleData);
+  }, [faction]);
+  console.log("펙션", faction);
   console.log(thisBoo);
   console.log(sort);
+  console.log("세일데이터", saleData);
+
+  // 사이드바 고정하는것
   useEffect(() => {
     document.body.style.overflow = sideView ? "hidden" : "";
-
     return () => {
       document.body.style.overflow = "";
     };
   }, [sideView]);
+
+  // 회원에 따라 세일하는것
+  // useEffect(() => {
+  //   if (faction === "프록시") {
+  //     setSortData(
+  //       booData.bangbooList.map((item) => ({
+  //         ...item,
+  //         salePrice: Math.floor(item.price * 0.8),
+  //       })),
+  //     );
+  //   } else {
+  //     setSortData(
+  //       booData.bangbooList.map((item) => ({
+  //         ...item,
+  //         salePrice: item.price,
+  //       })),
+  //     );
+  //   }
+  // }, [faction]);
   return (
     <MainWrap>
       <div className="inner">
@@ -137,7 +163,7 @@ const Main = (faction) => {
                     </div>
                   )}
                   <p className="boo_name">{item.name}</p>
-                  <p className="boo_price">₩ {item.price.toLocaleString()}</p>
+                  <p className="boo_price">₩ {item.salePrice}</p>
                 </div>
               </li>
             ))}
