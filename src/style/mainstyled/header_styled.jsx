@@ -6,6 +6,7 @@ export const HeaderWrap = styled.div`
   .inner {
     margin: 0 auto;
     display: flex;
+    justify-content: space-between;
     max-width: 1400px;
     width: 100%;
     height: 100%;
@@ -26,6 +27,12 @@ export const HeaderWrap = styled.div`
           }
         }
       }
+    }
+    .userInfo {
+      align-content: center;
+      font-size: 1.6em;
+      padding-right: 20px;
+      font-weight: 700;
     }
   }
 `;

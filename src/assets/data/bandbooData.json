@@ -39,7 +39,7 @@
     {
       "id": "safety",
       "src": "/bangboo/Safety.webp",
-      "name": "안전부",
+      "name": "세이프티",
       "price": 4809000,
       "englishName": "Safety",
       "rarity": 5,
@@ -758,7 +758,7 @@
     },
     {
       "id": "booltergeist",
-      "src": "/bangboo/Sprout.webp",
+      "src": "/bangboo/Booltergeist.webp",
       "price": 5680000,
       "name": "유령부",
       "englishName": "Booltergeist",

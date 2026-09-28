@@ -14,11 +14,11 @@ const Header = ({ faction }) => {
               <img src="/logo_b.png" alt="로고" />
             </Link>
           </h1>
-          <div className="userInfo">
-            <p>
-              <span>{username.facname}</span>
-            </p>
-          </div>
+        </div>
+        <div className="userInfo">
+          <p>
+            <span>{username.facname} </span>
+          </p>
         </div>
       </div>
     </HeaderWrap>

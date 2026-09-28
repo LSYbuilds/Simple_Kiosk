@@ -11,6 +11,7 @@ import { useState } from "react";
 
 function App() {
   const [faction, setFaction] = useState([]);
+  const [buybooData, setBuybooData] = useState(null);
   return (
     <Wrap>
       <Routes>
