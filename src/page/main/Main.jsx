@@ -1,15 +1,17 @@
 import React, { use, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { MainWrap, SelectedItem } from "../../style/mainstyled/main_styled";
 import booData from "../../assets/data/bandbooData.json";
 import Icon from "../../components/SvgComponents";
 import { AnimatePresence, motion } from "motion/react";
 
-const Main = ({ faction }) => {
+const Main = ({ faction, setBuybooData }) => {
   const [thisBoo, setThisBoo] = useState(null);
   const [sideView, setSideView] = useState(false);
   const [sort, setSort] = useState(null);
   const [sortData, setSortData] = useState(booData.bangbooList);
 
+  const navigate = useNavigate();
   const saleData = booData.bangbooList.map((item) => ({
     ...item,
     salePrice:
@@ -40,6 +42,26 @@ const Main = ({ faction }) => {
     const filerted = [...saleData].sort((a, b) => a.price - b.price);
     setSortData(filerted);
   };
+
+  // 배송구매
+  const handledelivery = () => {
+    const deliveryData = {
+      ...thisBoo,
+      buyClass: "delivery",
+    };
+    setBuybooData(deliveryData);
+    navigate("/order");
+  };
+  // 현장구매
+  const handleSite = () => {
+    const siteBuy = {
+      ...thisBoo,
+      buyClass: "site",
+    };
+    setBuybooData(siteBuy);
+    navigate("/order");
+  };
+
   useEffect(() => {
     setSortData(saleData);
   }, [faction]);
@@ -163,7 +185,20 @@ const Main = ({ faction }) => {
                     </div>
                   )}
                   <p className="boo_name">{item.name}</p>
-                  <p className="boo_price">₩ {item.salePrice}</p>
+                  {item.salePrice ? (
+                    <div className="price_box">
+                      <p className="origin_price">
+                        ₩ {item.price.toLocaleString()}
+                      </p>
+                      <p className="sale_price">
+                        ₩ {item.salePrice.toLocaleString()}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="price_box">
+                      <p className="price">₩ {item.price.toLocaleString()}</p>
+                    </div>
+                  )}
                 </div>
               </li>
             ))}
@@ -226,10 +261,18 @@ const Main = ({ faction }) => {
                         </div>
                       )}
                     </div>
-
-                    <div className="price">
-                      <p>W {thisBoo.price.toLocaleString()}</p>
-                    </div>
+                    {thisBoo.salePrice ? (
+                      <div className="price">
+                        <p className="origin_price">
+                          W {thisBoo.price.toLocaleString()}
+                        </p>
+                        <p>W {thisBoo.salePrice.toLocaleString()}</p>
+                      </div>
+                    ) : (
+                      <div className="price">
+                        <p>W {thisBoo.price.toLocaleString()}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -291,8 +334,8 @@ const Main = ({ faction }) => {
                   </div>
 
                   <div className="buy_buttons">
-                    <button>현장구매</button>
-                    <button>배송구매</button>
+                    <button onClick={() => handleSite()}>현장구매</button>
+                    <button onClick={() => handledelivery()}>배송구매</button>
                   </div>
                 </div>
               </motion.div>

@@ -4,7 +4,6 @@ export const MainWrap = styled.div`
   width: 100%;
   height: 100%;
   background: #1f1f1f;
-
   .inner {
     position: relative;
     display: flex;
@@ -175,31 +174,21 @@ export const MainWrap = styled.div`
       .list_grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-
         grid-column-gap: 16px;
         grid-row-gap: 16px;
-
         li {
           display: flex;
           flex-direction: column;
-
           flex: 0 0 20%;
-
           overflow: hidden;
-
           border-radius: 18px;
           border: 1px solid #d6dbe5;
-
           background: #fff;
-
           cursor: pointer;
-
           box-shadow: 0 5px 15px rgba(30, 35, 50, 0.06);
-
           transition:
             transform 0.25s ease,
             box-shadow 0.25s ease;
-
           &:hover {
             transform: translateY(-4px);
             box-shadow: 0 14px 28px rgba(30, 35, 50, 0.13);
@@ -247,17 +236,12 @@ export const MainWrap = styled.div`
 
             .eng_name {
               position: absolute;
-
               top: 18px;
               left: 18px;
-
               text-align: left;
-
               font-size: 1.1em;
               font-weight: 800;
-
               color: rgba(255, 255, 255, 0.75);
-
               letter-spacing: 0.04em;
             }
           }
@@ -265,11 +249,8 @@ export const MainWrap = styled.div`
           .boo_desc {
             display: flex;
             flex-direction: column;
-
-            padding: 16px 16px 18px;
-
+            padding: 16px 16px 24px;
             background: linear-gradient(180deg, #272c3a 0%, #1f2431 100%);
-
             color: #fff;
 
             .star_box {
@@ -300,15 +281,17 @@ export const MainWrap = styled.div`
               color: #fff;
             }
 
-            .boo_price {
+            .price_box {
+              position: relative;
               margin: 4px 0 0;
-
               text-align: center;
-
               font-size: 1.25em;
               font-weight: 600;
-
               color: #bfc6d8;
+              .origin_price {
+                font-size: 0.8em;
+                text-decoration: line-through;
+              }
             }
           }
 
@@ -529,11 +512,13 @@ export const SelectedItem = styled(motion.div)`
 
     p {
       margin: 0;
-
       color: #4d5cff;
-
       font-size: 25px;
       font-weight: 800;
+    }
+    .origin_price {
+      font-size: 1.4em;
+      text-decoration: line-through;
     }
   }
 

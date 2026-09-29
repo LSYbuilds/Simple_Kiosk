@@ -6,6 +6,7 @@ import Footer from "./components/main/Footer";
 import Introlayout from "./layout/Intro_layout";
 import Intro from "./page/intro/Intro";
 import Main from "./page/main/Main";
+import Order from "./page/main/Order";
 import "./App.css";
 import { useState } from "react";
 
@@ -19,7 +20,16 @@ function App() {
           <Route path="/" element={<Intro setFaction={setFaction} />}></Route>
         </Route>
         <Route element={<Mainlayout faction={faction} />}>
-          <Route path="/main" element={<Main faction={faction} />}></Route>
+          <Route
+            path="/main"
+            element={<Main faction={faction} setBuybooData={setBuybooData} />}
+          ></Route>
+          <Route
+            path="/order"
+            element={
+              <Order buybooData={buybooData} setBuybooData={setBuybooData} />
+            }
+          ></Route>
         </Route>
       </Routes>
     </Wrap>
