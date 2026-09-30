@@ -404,18 +404,6 @@ export const DeliveryInner = styled.section`
         margin: 0;
         font-size: 15px;
       }
-
-      .origin_price {
-        color: #999;
-      }
-
-      .sale_price {
-        padding-top: 15px;
-        border-top: 1px solid #eee;
-        color: #222;
-        font-size: 24px;
-        font-weight: 700;
-      }
     }
   }
 

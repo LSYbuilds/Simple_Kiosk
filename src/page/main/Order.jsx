@@ -11,6 +11,10 @@ const Order = ({ buybooData, setBuybooData }) => {
   const orderboodata = buybooData;
   const [orderBooData, setOrderBooData] = useState(orderboodata);
   const [finalBuy, setFinalBuy] = useState(null);
+  const [optionOneCss, setOptionOneCss] = useState(false);
+  const [optionTwoCss, setOptionTwoCss] = useState(false);
+  const [service, setService] = useState({});
+  const [core, setCore] = useState([]);
   const deliveryOption = [
     {
       id: "1",
@@ -50,6 +54,8 @@ const Order = ({ buybooData, setBuybooData }) => {
       ],
     },
   ];
+  console.log(service);
+  console.log(core);
   const handleConfirm = () => {};
   const [detailOpen, setDetailOpen] = useState(false);
   console.log("오더부데이터", orderboodata);
@@ -184,7 +190,17 @@ const Order = ({ buybooData, setBuybooData }) => {
                         <p className="sub_title">보증기간</p>
                         <div className="select_option">
                           {item.service.map((iitem) => (
-                            <div className="option_item" key={iitem.id}>
+                            <div
+                              className={`option_item`}
+                              key={iitem.id}
+                              onClick={() => {
+                                (setService({
+                                  title: iitem.title,
+                                  price: iitem.price,
+                                }),
+                                  setOptionOneCss((props) => !props));
+                              }}
+                            >
                               <span>{iitem.title}</span>
                               <span>₩ {iitem.price.toLocaleString()}</span>
                             </div>
@@ -193,7 +209,17 @@ const Order = ({ buybooData, setBuybooData }) => {
                         <p className="sub_title">펌웨어</p>
                         <div className="select_option">
                           {item.core.map((iitem) => (
-                            <div className="option_item" key={iitem.id}>
+                            <div
+                              className="option_item"
+                              key={iitem.id}
+                              onClick={() => {
+                                (setCore({
+                                  title: iitem.title,
+                                  price: iitem.price,
+                                }),
+                                  setOptionTwoCss((props) => !props));
+                              }}
+                            >
                               <span>{iitem.title}</span>
                               <span>₩ {iitem.price.toLocaleString()}</span>
                             </div>
@@ -210,20 +236,35 @@ const Order = ({ buybooData, setBuybooData }) => {
                 <div className="price_list">
                   <p className="origin_price">
                     <span>원가</span>
-                    <span></span>
+                    <span>₩ {orderBooData.price.toLocaleString()}</span>
                   </p>
-                  <p className="sale_price">
-                    <span>할인가</span>
-                    <span></span>
-                  </p>
-                  <p className="service_price">
-                    <span></span>
-                    <span></span>
-                  </p>
-                  <p className="core_price">
-                    <span></span>
-                    <span></span>
-                  </p>
+                  {orderBooData.salePrice &&
+                  orderBooData.salePrice !== orderBooData.price ? (
+                    <p className="sale_price">
+                      <span>할인가</span>
+                      <span>₩ {orderBooData.salePrice.toLocaleString()}</span>
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                  {service.length === 0 ? (
+                    ""
+                  ) : (
+                    <p className="service_price">
+                      <span>{service.title}</span>
+                      <span>₩ {service.price.toLocaleString()}</span>
+                      <span className="cancle_btn">X</span>
+                    </p>
+                  )}
+                  {core.length === 0 ? (
+                    ""
+                  ) : (
+                    <p className="core_price">
+                      <span>{core.title}</span>
+                      <span>₩ {core.price.toLocaleString()}</span>
+                      <span className="cancle_btn">X</span>
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
