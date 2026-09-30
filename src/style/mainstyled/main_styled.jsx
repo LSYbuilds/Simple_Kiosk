@@ -170,7 +170,52 @@ export const MainWrap = styled.div`
           }
         }
       }
-
+      .sale_list_box {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        border: 1px solid #d6dbe5;
+        background: linear-gradient(180deg, #fafbfe 0%, #f3f5f9 100%);
+        padding: 18px;
+        border-radius: 18px;
+        .sale_title {
+          font-weight: 700;
+        }
+        .sale_list {
+          display: flex;
+          width: 100%;
+          gap: 8px;
+          li {
+            width: 125px;
+            height: 125px;
+            padding: 8px 0px;
+            background-color: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            cursor: pointer;
+            .sale_boo_img {
+              display: flex;
+              justify-content: center;
+              width: 100%;
+              height: 80%;
+              align-items: center;
+              align-content: center;
+              img {
+                height: 100%;
+              }
+            }
+            .sale_boo_name {
+              text-align: center;
+              font-weight: 700;
+              color: #000000;
+            }
+            &:hover {
+              background-color: #d4d4d4;
+            }
+          }
+        }
+      }
       .list_grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -179,6 +224,7 @@ export const MainWrap = styled.div`
         li {
           display: flex;
           flex-direction: column;
+          overflow: hidden;
           flex: 0 0 20%;
           overflow: hidden;
           border-radius: 18px;
@@ -218,14 +264,10 @@ export const MainWrap = styled.div`
             display: flex;
             justify-content: center;
             align-items: center;
-
             position: relative;
-
             width: 100%;
             height: 300px;
-
             overflow: hidden;
-
             img {
               transition:
                 height 0.3s ease,
@@ -247,6 +289,7 @@ export const MainWrap = styled.div`
           }
 
           .boo_desc {
+            flex: 1;
             display: flex;
             flex-direction: column;
             padding: 16px 16px 24px;

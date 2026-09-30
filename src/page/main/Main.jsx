@@ -3,44 +3,86 @@ import { Link, useNavigate } from "react-router-dom";
 import { MainWrap, SelectedItem } from "../../style/mainstyled/main_styled";
 import booData from "../../assets/data/bandbooData.json";
 import Icon from "../../components/SvgComponents";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, time } from "motion/react";
+import { SaleBooSwiper } from "../../style/mainstyled/swiper_styed";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const Main = ({ faction, setBuybooData }) => {
   const [thisBoo, setThisBoo] = useState(null);
   const [sideView, setSideView] = useState(false);
   const [sort, setSort] = useState(null);
-  const [sortData, setSortData] = useState(booData.bangbooList);
+  const [allbooData, setAllbooData] = useState(booData.bangbooList);
+  const [saleboo, setSaleboo] = useState([]);
 
   const navigate = useNavigate();
-  const saleData = booData.bangbooList.map((item) => ({
-    ...item,
-    salePrice:
-      faction.facname === "프록시" ? Math.floor(item.price * 0.8) : item.price,
-  }));
+  // const saleData = booData.bangbooList.map((item) => ({
+  //   ...item,
+  //   salePrice:
+  //     faction.facname === "프록시" ? Math.floor(item.price * 0.8) : item.price,
+  // }));
+  const factionSaleFunc = () => {
+    let saleData;
+    let saleboo;
+    if (faction.facename === "proxy") {
+      // proxy → 전체 20% 할인
+      saleData = booData.bangbooList.map((item) => ({
+        ...item,
+        salePrice: Math.floor(item.price * 0.8),
+      }));
+    } else {
+      // private → 해당 항목 30% 할인
+      // public → 해당 항목 50% 할인
+      saleData = booData.bangbooList.map((item) => ({
+        ...item,
+        salePrice:
+          item.saleFaction === faction.facename
+            ? faction.facename === "private"
+              ? Math.floor(item.price * 0.7)
+              : faction.facename === "public"
+                ? Math.floor(item.price * 0.5)
+                : item.price
+            : item.price,
+      }));
+    }
+    return saleData;
+  };
+
+  // 할인중인 항목만 출력
+  const salebooList = (saleData) => {
+    let saleboo = saleData.filter(
+      (item) => item.salePrice && item.salePrice < item.price,
+    );
+    return saleboo;
+  };
 
   // 전체 불러오기
   const allDataCall = () => {
-    setSortData(saleData);
+    setAllbooData(factionSaleFunc());
   };
+
   // 원소 필터
   const sortDataFilter = (sortName) => {
-    const filerted = saleData.filter((item) => item.element === sortName);
-    setSortData(filerted);
+    const reset = factionSaleFunc();
+    const filerted = reset.filter((item) => item.element === sortName);
+    setAllbooData(filerted);
   };
   // 랭크필터
   const sortDataRankFilter = (sortRank) => {
-    const filerted = saleData.filter((item) => item.rarity === sortRank);
-    setSortData(filerted);
+    const reset = factionSaleFunc();
+    const filerted = reset.filter((item) => item.rarity === sortRank);
+    setAllbooData(filerted);
   };
   // 높은가격순
   const sortDataPriceHigh = () => {
-    const filerted = [...saleData].sort((a, b) => b.price - a.price);
-    setSortData(filerted);
+    const reset = factionSaleFunc();
+    const filerted = [...reset].sort((a, b) => b.price - a.price);
+    setAllbooData(filerted);
   };
   // 낮은가격순
   const sortDataPriceLow = () => {
-    const filerted = [...saleData].sort((a, b) => a.price - b.price);
-    setSortData(filerted);
+    const reset = factionSaleFunc();
+    const filerted = [...reset].sort((a, b) => a.price - b.price);
+    setAllbooData(filerted);
   };
 
   // 배송구매
@@ -62,13 +104,20 @@ const Main = ({ faction, setBuybooData }) => {
     navigate("/order");
   };
 
+  // 펙션별 세일 이펙트
   useEffect(() => {
-    setSortData(saleData);
+    const saleData = factionSaleFunc();
+    const salefilter = salebooList(saleData);
+    console.log("현재 faction:", faction);
+    console.log("할인 데이터:", saleData);
+    console.log("세일하는 부만", salefilter);
+    setAllbooData(saleData);
+    setSaleboo(salefilter);
   }, [faction]);
+
   console.log("펙션", faction);
   console.log(thisBoo);
   console.log(sort);
-  console.log("세일데이터", saleData);
 
   // 사이드바 고정하는것
   useEffect(() => {
@@ -77,25 +126,6 @@ const Main = ({ faction, setBuybooData }) => {
       document.body.style.overflow = "";
     };
   }, [sideView]);
-
-  // 회원에 따라 세일하는것
-  // useEffect(() => {
-  //   if (faction === "프록시") {
-  //     setSortData(
-  //       booData.bangbooList.map((item) => ({
-  //         ...item,
-  //         salePrice: Math.floor(item.price * 0.8),
-  //       })),
-  //     );
-  //   } else {
-  //     setSortData(
-  //       booData.bangbooList.map((item) => ({
-  //         ...item,
-  //         salePrice: item.price,
-  //       })),
-  //     );
-  //   }
-  // }, [faction]);
   return (
     <MainWrap>
       <div className="inner">
@@ -152,8 +182,35 @@ const Main = ({ faction, setBuybooData }) => {
               </AnimatePresence>
             </li>
           </ul>
+          {saleboo.length === 0 ? (
+            <div className="sale_list_box">
+              <p className="sale_title">현재 할인중인 BANGBOO</p>
+              <div>로스캘리퍼 방부넷에 회원가입하여 할인혜택을 누려보세요</div>
+            </div>
+          ) : (
+            <div className="sale_list_box">
+              <p className="sale_title">현재 할인중인 BANGBOO</p>
+              <SaleBooSwiper slidesPerView={8} spaceBetween={8}>
+                {saleboo.map((item, idx) => (
+                  <SwiperSlide
+                    key={idx}
+                    className={`boo_img ${item.rarity === 5 ? "gold" : "pup"}`}
+                    onClick={() => {
+                      setThisBoo(item);
+                      setSideView((props) => !props);
+                    }}
+                  >
+                    <div className="sale_boo_img">
+                      <img src={item.src} alt="" />
+                    </div>
+                    <div className="sale_boo_name">{item.name}</div>
+                  </SwiperSlide>
+                ))}
+              </SaleBooSwiper>
+            </div>
+          )}
           <ul className="list_grid">
-            {sortData.map((item) => (
+            {allbooData.map((item) => (
               <li
                 key={item.id}
                 onClick={() => {
@@ -186,14 +243,20 @@ const Main = ({ faction, setBuybooData }) => {
                   )}
                   <p className="boo_name">{item.name}</p>
                   {item.salePrice ? (
-                    <div className="price_box">
-                      <p className="origin_price">
-                        ₩ {item.price.toLocaleString()}
-                      </p>
-                      <p className="sale_price">
-                        ₩ {item.salePrice.toLocaleString()}
-                      </p>
-                    </div>
+                    item.price !== item.salePrice ? (
+                      <div className="price_box">
+                        <p className="origin_price">
+                          ₩ {item.price.toLocaleString()}
+                        </p>
+                        <p className="sale_price">
+                          ₩ {item.salePrice.toLocaleString()}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="price_box">
+                        <p className="price">₩ {item.price.toLocaleString()}</p>
+                      </div>
+                    )
                   ) : (
                     <div className="price_box">
                       <p className="price">₩ {item.price.toLocaleString()}</p>

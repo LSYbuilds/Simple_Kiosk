@@ -14,6 +14,7 @@ const Intro = ({ setFaction }) => {
     try {
       const factionData = {
         facname: factionName,
+        facename: select,
         facnum: factionNumber,
       };
       console.log(factionData);
@@ -36,7 +37,7 @@ const Intro = ({ setFaction }) => {
               }
             }}
           >
-            {select === "Proxy" ? (
+            {select === "proxy" ? (
               <div className="modal_inner">
                 <div className="close_btn">
                   <Icon.close
@@ -208,7 +209,7 @@ const Intro = ({ setFaction }) => {
                 to="#"
                 onClick={() => {
                   setMember((props) => !props);
-                  setSelect("Proxy");
+                  setSelect("proxy");
                   setFactionName("프록시");
                 }}
               >
