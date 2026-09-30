@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import {
   OrderWrap,
   DeliveryInner,
@@ -6,15 +6,34 @@ import {
   EmptyInner,
 } from "../../style/mainstyled/order_styled";
 import Icon from "../../components/SvgComponents";
+import { number } from "motion";
 
 const Order = ({ buybooData, setBuybooData }) => {
-  const orderboodata = buybooData;
-  const [orderBooData, setOrderBooData] = useState(orderboodata);
-  const [finalBuy, setFinalBuy] = useState(null);
+  const boodata = buybooData;
+  // 부데이터 전부
+  const [orderBooData, setOrderBooData] = useState(boodata);
+  // 원가
+  const [originPriceData] = useState(boodata.price);
+  // 할인가
+  const [salePriceData] = useState(boodata.salePrice);
+  // 할인총합
+  const [slaeTotalPrice, setSlaeTotalPrice] = useState(boodata.salePrice);
+  // 일반총합
+  const [totalPrice, setTotalPrice] = useState(boodata.price);
+  // 구분-----------------
   const [optionOneCss, setOptionOneCss] = useState(false);
   const [optionTwoCss, setOptionTwoCss] = useState(false);
-  const [service, setService] = useState({});
-  const [core, setCore] = useState([]);
+  // 유저이름
+  const [userName, setUserName] = useState("");
+  const [address, setAddress] = useState("");
+  const [memo, setMemo] = useState("");
+  // 서비스 옵션
+  const [service, setService] = useState(null);
+  // 코어옵션
+  const [core, setCore] = useState(null);
+  const [countNum, setCountNum] = useState(1);
+  // 최종주문데이터
+  const [finalOrder, setFinalOrder] = useState({});
   const deliveryOption = [
     {
       id: "1",
@@ -54,11 +73,168 @@ const Order = ({ buybooData, setBuybooData }) => {
       ],
     },
   ];
-  console.log(service);
-  console.log(core);
+  // console.log(service);
+  // console.log(core);
+  console.log("넘어온데이터 봐", orderBooData);
+  // console.log("일반총합", totalPrice);
+  // console.log("할인총합", slaeTotalPrice);
   const handleConfirm = () => {};
   const [detailOpen, setDetailOpen] = useState(false);
-  console.log("오더부데이터", orderboodata);
+
+  const handlePlus = () => {
+    setCountNum((prev) => {
+      const nextCount = prev + 1;
+
+      if (orderBooData.price !== orderBooData.salePrice) {
+        // 할인 있음
+        const newSalePrice = salePriceData + salePriceData;
+        setOrderBooData((item) => ({
+          ...item,
+          salePrice: newSalePrice,
+        }));
+        setSlaeTotalPrice(newSalePrice);
+      } else {
+        // 할인 없음
+        const newPrice = originPriceData + originPriceData;
+        setOrderBooData((item) => ({
+          ...item,
+          price: item.price + newPrice,
+          salePrice: item.salePrice + newPrice,
+        }));
+        setTotalPrice(newPrice);
+      }
+
+      return nextCount;
+    });
+  };
+  const handleMinus = () => {
+    if (countNum <= 1) {
+      alert("1개 이상 수량을 설정해야합니다");
+      return;
+    }
+    setCountNum((prev) => prev - 1);
+    if (originPriceData !== salePriceData) {
+      // 할인 있음
+      if (orderBooData.salePrice <= salePriceData) {
+        alert("세일된 값보다 내려갈 순 없습니다");
+        return;
+      }
+      const newSalePrice = slaeTotalPrice - salePriceData;
+      // setOrderBooData((item) => ({
+      //   ...item,
+      //   salePrice: newSalePrice,
+      // }));
+
+      setSlaeTotalPrice(newSalePrice);
+    } else {
+      // 할인 없음
+      const newPrice = totalPrice - originPriceData;
+      // setOrderBooData((item) => ({
+      //   ...item,
+      //   price: newPrice,
+      //   salePrice: newPrice,
+      // }));
+
+      setTotalPrice(newPrice);
+    }
+  };
+
+  // 서비스옵션제외
+  const handleCancelService = (price) => {
+    let optionPrice;
+    if (orderBooData.price !== orderBooData.salePrice) {
+      optionPrice = slaeTotalPrice - price;
+      setSlaeTotalPrice(optionPrice);
+    } else {
+      optionPrice = totalPrice - price;
+      setTotalPrice(optionPrice);
+    }
+  };
+
+  // 코어옵션제외
+  const handleCancelCore = (price) => {
+    let optionPrice;
+    if (orderBooData.price !== orderBooData.salePrice) {
+      optionPrice = slaeTotalPrice - price;
+      setSlaeTotalPrice(optionPrice);
+    } else {
+      optionPrice = totalPrice - price;
+      setTotalPrice(optionPrice);
+    }
+  };
+
+  const handleServiceOption = (iitem) => {
+    setService(iitem);
+    let defaultPrice;
+    console.log("서비스 옵션", iitem);
+
+    if (orderBooData.price !== orderBooData.salePrice) {
+      if (service) {
+        defaultPrice = slaeTotalPrice - service.price + iitem.price;
+      } else {
+        defaultPrice = slaeTotalPrice + iitem.price;
+      }
+      setSlaeTotalPrice(defaultPrice);
+    } else {
+      // 할인이 아닐때
+      if (service) {
+        defaultPrice = totalPrice - service.price + iitem.price;
+      } else {
+        defaultPrice = totalPrice + iitem.price;
+      }
+      setTotalPrice(defaultPrice);
+    }
+  };
+  const handleCoreOption = (iitem) => {
+    setCore(iitem);
+
+    let defaultPrice;
+
+    if (orderBooData.price !== orderBooData.salePrice) {
+      // 할인 상품
+      if (core) {
+        defaultPrice = slaeTotalPrice - core.price + iitem.price;
+      } else {
+        defaultPrice = slaeTotalPrice + iitem.price;
+      }
+
+      setSlaeTotalPrice(defaultPrice);
+    } else {
+      // 일반 상품
+      if (core) {
+        defaultPrice = totalPrice - core.price + iitem.price;
+      } else {
+        defaultPrice = totalPrice + iitem.price;
+      }
+
+      setTotalPrice(defaultPrice);
+    }
+  };
+  // const finalConfirmfunc = () => {
+  //   if (orderBooData.price !== orderBooData.salePrice) {
+  //     const data = {
+  //       id: "1",
+  //       username: userName,
+  //       address: address,
+  //       deliverymemo: memo,
+  //       coreOption: core.title,
+  //       serviceOption: service.title,
+  //       totalPrice: slaeTotalPrice,
+  //     };
+  //     console.log("최종데이터", data);
+  //   } else {
+  //     const data = {
+  //       id: "1",
+  //       username: userName,
+  //       address: address,
+  //       deliverymemo: memo,
+  //       coreOption: core.title,
+  //       serviceOption: service.title,
+  //       totalPrice: totalPrice,
+  //     };
+  //     console.log("최종데이터", data);
+  //   }
+  // };
   return (
     <OrderWrap>
       <div className="inner">
@@ -109,20 +285,29 @@ const Order = ({ buybooData, setBuybooData }) => {
                       orderBooData.salePrice !== orderBooData.price ? (
                         <div className="mamber_price">
                           <p className="origin_price">
-                            ₩ {orderBooData.price.toLocaleString()}
+                            ₩ {totalPrice.toLocaleString()}
                           </p>
 
                           <p className="sale_price">
-                            ₩ {orderBooData.salePrice.toLocaleString()}
+                            ₩ {slaeTotalPrice.toLocaleString()}
                           </p>
                         </div>
                       ) : (
-                        <p className="price">
-                          ₩ {orderBooData.price.toLocaleString()}
-                        </p>
+                        <p className="price">₩ {totalPrice.toLocaleString()}</p>
                       )}
                     </div>
                     <div className="boo_qoute">{orderBooData.description}</div>
+                    <div className="boo_count_box">
+                      <div className="boo_count">
+                        <span className="plus" onClick={() => handleMinus()}>
+                          -
+                        </span>
+                        <span>{countNum}</span>
+                        <span className="minus" onClick={() => handlePlus()}>
+                          +
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="boo_detail_info_box">
@@ -177,11 +362,23 @@ const Order = ({ buybooData, setBuybooData }) => {
                 <div className="user_info_option">
                   <div className="user_info">
                     <p>이름을 입력해주세요</p>
-                    <input type="text" placeholder="이름을 입력해주세요" />
+                    <input
+                      type="text"
+                      placeholder="이름을 입력해주세요"
+                      onChange={(e) => setUserName(e.target.value)}
+                    />
                     <p>배송받으실 주소를 입력해주세요</p>
-                    <input type="text" placeholder="배송주소 입력" />
+                    <input
+                      type="text"
+                      placeholder="배송주소 입력"
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
                     <p>배송메모를 입력해주세요</p>
-                    <input type="text" placeholder="배송주소 입력" />
+                    <input
+                      type="text"
+                      placeholder="배송주소 입력"
+                      onChange={(e) => setMemo(e.target.value)}
+                    />
                   </div>
                   <div className="option_list">
                     {deliveryOption.map((item) => (
@@ -189,16 +386,13 @@ const Order = ({ buybooData, setBuybooData }) => {
                         <p className="option_title">옵션을 선택해주세요</p>
                         <p className="sub_title">보증기간</p>
                         <div className="select_option">
-                          {item.service.map((iitem) => (
+                          {item.service.map((iitem, idx) => (
                             <div
-                              className={`option_item`}
+                              className={`option_item ${optionOneCss === idx ? "active" : ""}`}
                               key={iitem.id}
                               onClick={() => {
-                                (setService({
-                                  title: iitem.title,
-                                  price: iitem.price,
-                                }),
-                                  setOptionOneCss((props) => !props));
+                                setOptionOneCss(idx);
+                                handleServiceOption(iitem);
                               }}
                             >
                               <span>{iitem.title}</span>
@@ -208,16 +402,13 @@ const Order = ({ buybooData, setBuybooData }) => {
                         </div>
                         <p className="sub_title">펌웨어</p>
                         <div className="select_option">
-                          {item.core.map((iitem) => (
+                          {item.core.map((iitem, idx) => (
                             <div
-                              className="option_item"
+                              className={`option_item ${optionTwoCss === idx ? "activee" : ""}`}
                               key={iitem.id}
                               onClick={() => {
-                                (setCore({
-                                  title: iitem.title,
-                                  price: iitem.price,
-                                }),
-                                  setOptionTwoCss((props) => !props));
+                                setOptionTwoCss(idx);
+                                handleCoreOption(iitem);
                               }}
                             >
                               <span>{iitem.title}</span>
@@ -234,38 +425,74 @@ const Order = ({ buybooData, setBuybooData }) => {
               <div className="order_price">
                 <div className="price_title">결제상세</div>
                 <div className="price_list">
-                  <p className="origin_price">
+                  <div className="origin_price">
                     <span>원가</span>
-                    <span>₩ {orderBooData.price.toLocaleString()}</span>
-                  </p>
+                    <span>₩ {originPriceData.toLocaleString()}</span>
+                  </div>
                   {orderBooData.salePrice &&
                   orderBooData.salePrice !== orderBooData.price ? (
-                    <p className="sale_price">
+                    <div className="sale_price">
                       <span>할인가</span>
-                      <span>₩ {orderBooData.salePrice.toLocaleString()}</span>
-                    </p>
+                      <span>₩ {slaeTotalPrice.toLocaleString()}</span>
+                    </div>
                   ) : (
                     ""
                   )}
-                  {service.length === 0 ? (
-                    ""
+                  {service ? (
+                    <div className="service_price">
+                      <p>{service.title}</p>
+                      <p>
+                        <span>₩ {service.price}</span>
+                        <span
+                          className="cancel_btn"
+                          onClick={() => {
+                            (setService(null),
+                              handleCancelService(service.price));
+                          }}
+                        >
+                          X
+                        </span>
+                      </p>
+                    </div>
                   ) : (
-                    <p className="service_price">
-                      <span>{service.title}</span>
-                      <span>₩ {service.price.toLocaleString()}</span>
-                      <span className="cancle_btn">X</span>
-                    </p>
+                    ""
                   )}
-                  {core.length === 0 ? (
-                    ""
+                  {core ? (
+                    <div className="core_price">
+                      <p>{core.title}</p>
+                      <p>
+                        <span>₩ {core.price}</span>
+                        <span
+                          className="cancel_btn"
+                          onClick={() => {
+                            (setCore(null), handleCancelCore(core.price));
+                          }}
+                        >
+                          X
+                        </span>
+                      </p>
+                    </div>
                   ) : (
-                    <p className="core_price">
-                      <span>{core.title}</span>
-                      <span>₩ {core.price.toLocaleString()}</span>
-                      <span className="cancle_btn">X</span>
-                    </p>
+                    ""
+                  )}
+                  {orderBooData.price !== orderBooData.salePrice ? (
+                    <div className="total_price">
+                      <span>총합</span>
+                      <span>₩ {slaeTotalPrice}</span>
+                    </div>
+                  ) : (
+                    <div className="total_price">
+                      <span>총합</span>
+                      <span>₩ {totalPrice}</span>
+                    </div>
                   )}
                 </div>
+                <button
+                  className="final_confirm"
+                  onClick={() => finalConfirmfunc()}
+                >
+                  구매하기
+                </button>
               </div>
             </div>
           </DeliveryInner>
