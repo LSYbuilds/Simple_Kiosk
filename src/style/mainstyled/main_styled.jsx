@@ -18,9 +18,7 @@ export const MainWrap = styled.div`
     min-height: 100vh;
     width: 100%;
     overflow: hidden;
-
     background: #eef1f6;
-
     .hero_section {
       width: 100%;
       padding: 20px;
@@ -83,7 +81,6 @@ export const MainWrap = styled.div`
         display: flex;
         gap: 14px;
         height: 54px;
-
         li {
           position: relative;
           width: 20%;
@@ -128,18 +125,13 @@ export const MainWrap = styled.div`
               box-shadow: 0 5px 15px rgba(70, 80, 180, 0.08);
             }
           }
-
           .sort_list {
             position: absolute;
             z-index: 800;
-
             top: 0;
             left: 0;
-
             padding-top: 54px;
-
             width: 100%;
-
             display: flex;
             flex-direction: column;
             gap: 4px;
@@ -366,6 +358,64 @@ export const MainWrap = styled.div`
       }
     }
   }
+  @media (max-width: 1024px) {
+    .inner .list_section {
+      .list_grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+  @media (max-width: 737px) {
+    .inner .hero_section {
+      .event_banner {
+        P {
+          width: 80%;
+          font-size: 1.5em;
+        }
+      }
+    }
+
+    .inner .list_section {
+      .category {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: auto;
+        li {
+          flex: 0 0 100%;
+          height: auto;
+          .title {
+            width: 100%;
+            height: 40px;
+            justify-content: space-between;
+            padding: 0px 5%;
+            svg {
+              position: static;
+            }
+          }
+          .sort_list {
+            position: static;
+            padding: 0px;
+          }
+          &:nth-of-type(1) {
+            .title {
+              justify-content: center;
+            }
+          }
+        }
+      }
+      .list_grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+  @media (max-width: 460px) {
+    .inner .list_section {
+      .list_grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
 `;
 /* =====================================================
    Selected Item
@@ -440,6 +490,16 @@ export const SelectedItem = styled(motion.div)`
     &::-webkit-scrollbar-track {
       background: transparent;
     }
+  }
+
+  /* =========================
+     닫기 버튼
+  ========================= */
+  .close_btn {
+    display: none;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 30px;
   }
 
   /* =========================
@@ -864,29 +924,39 @@ export const SelectedItem = styled(motion.div)`
   ========================= */
 
   @media (max-width: 737px) {
+    .close_btn {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-bottom: 30px;
+      button {
+        width: 30px;
+        height: 30px;
+        border: none;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
     .selected_item_info {
       right: 0;
-
       width: 100%;
-
       padding: 25px 20px;
     }
-
     .basicInfo_box {
       gap: 18px;
     }
-
     .boo_img_box {
       flex-basis: 130px;
 
       width: 130px;
       height: 130px;
     }
-
     .boo_name_box .boo_name {
       font-size: 23px;
     }
-
     .desetext {
       font-size: 15px;
     }

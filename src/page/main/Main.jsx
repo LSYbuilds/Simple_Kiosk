@@ -295,11 +295,15 @@ const Main = ({ faction, setBuybooData }) => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
+                <div className="close_btn">
+                  <button onClick={() => setSideView(false)}>
+                    <Icon.close />
+                  </button>
+                </div>
                 <div className="basicInfo_box">
                   <div className="boo_img_box">
                     <img src={publicPath(thisBoo.src)} alt="" />
                   </div>
-
                   <div className="boo_info_box">
                     <div className="boo_name_box">
                       <p className="boo_name">{thisBoo.name}</p>

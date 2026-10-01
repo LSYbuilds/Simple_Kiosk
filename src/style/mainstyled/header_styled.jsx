@@ -35,4 +35,31 @@ export const HeaderWrap = styled.div`
       font-weight: 700;
     }
   }
+  @media (max-width: 1024px) {
+  }
+  @media (max-width: 737px) {
+    .logo_box {
+      display: flex;
+      justify-content: flex-start;
+      padding: 0px;
+      width: fit-content;
+      height: 100%;
+      overflow: hidden;
+      .logo {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        a {
+          width: 100%;
+          height: 100%;
+          img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+  }
 `;
