@@ -10,7 +10,7 @@ const Header = ({ faction }) => {
       <div className="inner">
         <div className="logo_box">
           <h1 className="logo">
-            <Link to="#">
+            <Link to="/">
               <img src="/logo_b.png" alt="로고" />
             </Link>
           </h1>

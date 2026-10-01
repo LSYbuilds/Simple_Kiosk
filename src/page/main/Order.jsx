@@ -1,14 +1,16 @@
 import React, { use, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   OrderWrap,
   DeliveryInner,
   SiteBuyInner,
   EmptyInner,
+  ConfirmWrap,
 } from "../../style/mainstyled/order_styled";
 import Icon from "../../components/SvgComponents";
 import { number } from "motion";
 
-const Order = ({ buybooData, setBuybooData }) => {
+const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
   const boodata = buybooData;
   // 부데이터 전부
   const [orderBooData, setOrderBooData] = useState(boodata);
@@ -31,9 +33,11 @@ const Order = ({ buybooData, setBuybooData }) => {
   const [service, setService] = useState(null);
   // 코어옵션
   const [core, setCore] = useState(null);
+  // 부 갯수
   const [countNum, setCountNum] = useState(1);
-  // 최종주문데이터
-  const [finalOrder, setFinalOrder] = useState({});
+  // 최종주문데이터 모달
+  const [confirmModal, setConfirmModal] = useState(false);
+  const navigate = useNavigate();
   const deliveryOption = [
     {
       id: "1",
@@ -75,7 +79,6 @@ const Order = ({ buybooData, setBuybooData }) => {
   ];
   // console.log(service);
   // console.log(core);
-  console.log("넘어온데이터 봐", orderBooData);
   // console.log("일반총합", totalPrice);
   // console.log("할인총합", slaeTotalPrice);
   const handleConfirm = () => {};
@@ -85,9 +88,9 @@ const Order = ({ buybooData, setBuybooData }) => {
     setCountNum((prev) => {
       const nextCount = prev + 1;
 
-      if (orderBooData.price !== orderBooData.salePrice) {
+      if (originPriceData !== salePriceData) {
         // 할인 있음
-        const newSalePrice = salePriceData + salePriceData;
+        const newSalePrice = slaeTotalPrice + salePriceData;
         setOrderBooData((item) => ({
           ...item,
           salePrice: newSalePrice,
@@ -95,7 +98,7 @@ const Order = ({ buybooData, setBuybooData }) => {
         setSlaeTotalPrice(newSalePrice);
       } else {
         // 할인 없음
-        const newPrice = originPriceData + originPriceData;
+        const newPrice = totalPrice + originPriceData;
         setOrderBooData((item) => ({
           ...item,
           price: item.price + newPrice,
@@ -115,25 +118,16 @@ const Order = ({ buybooData, setBuybooData }) => {
     setCountNum((prev) => prev - 1);
     if (originPriceData !== salePriceData) {
       // 할인 있음
-      if (orderBooData.salePrice <= salePriceData) {
+      if (slaeTotalPrice <= salePriceData) {
         alert("세일된 값보다 내려갈 순 없습니다");
         return;
       }
       const newSalePrice = slaeTotalPrice - salePriceData;
-      // setOrderBooData((item) => ({
-      //   ...item,
-      //   salePrice: newSalePrice,
-      // }));
 
       setSlaeTotalPrice(newSalePrice);
     } else {
       // 할인 없음
       const newPrice = totalPrice - originPriceData;
-      // setOrderBooData((item) => ({
-      //   ...item,
-      //   price: newPrice,
-      //   salePrice: newPrice,
-      // }));
 
       setTotalPrice(newPrice);
     }
@@ -210,35 +204,110 @@ const Order = ({ buybooData, setBuybooData }) => {
       setTotalPrice(defaultPrice);
     }
   };
-  // const finalConfirmfunc = () => {
-  //   if (orderBooData.price !== orderBooData.salePrice) {
-  //     const data = {
-  //       id: "1",
-  //       username: userName,
-  //       address: address,
-  //       deliverymemo: memo,
-  //       coreOption: core.title,
-  //       serviceOption: service.title,
-  //       totalPrice: slaeTotalPrice,
-  //     };
-  //     console.log("최종데이터", data);
-  //   } else {
-  //     const data = {
-  //       id: "1",
-  //       username: userName,
-  //       address: address,
-  //       deliverymemo: memo,
-  //       coreOption: core.title,
-  //       serviceOption: service.title,
-  //       totalPrice: totalPrice,
-  //     };
-  //     console.log("최종데이터", data);
-  //   }
-  // };
+  const finalConfirm = () => {
+    if (!userName) {
+      alert("고객이름을 입력해주세요");
+    } else if (!address) {
+      alert("배송주소를 입력해주세요");
+    } else if (!service) {
+      alert("서비스 옵션을 선택해주세요");
+    } else if (!core) {
+      alert("코어옵션을 선택해주세요");
+    } else {
+      const data = {
+        username: userName ? userName : "",
+        address: address ? address : "",
+        deliverymemo: memo ? memo : "안전 배송 부탁드립니다.",
+        booname: buybooData.name,
+        booimg: buybooData.src,
+        originPirce: originPriceData,
+        SalePrice:
+          originPriceData !== salePriceData ? salePriceData : "할인없음",
+        coreOption: core ? core.title : "",
+        corePrice: core ? core.price : "",
+        serviceOption: service ? service.title : "",
+        servicePrice: service ? service.price : "",
+        booCount: countNum,
+        totalPrice:
+          originPriceData === salePriceData ? totalPrice : slaeTotalPrice,
+      };
+      console.log("최종데이터", data);
+      setFinalOrder(data);
+      setConfirmModal(true);
+    }
+  };
+
+  const handleFinalConfirmBtn = () => {
+    navigate("/orderconfirm");
+  };
   return (
     <OrderWrap>
+      {confirmModal && (
+        <ConfirmWrap>
+          <div className="modal_inner">
+            <div
+              className="cancel_btn_box"
+              onClick={() => setConfirmModal(false)}
+            ></div>
+            <p className="modal_title">결제 최종확인</p>
+            <p className="modal_sub_title">입력하신 최종주문내역입니다.</p>
+            <ul className="final_data_list">
+              <li>
+                <span>사용자 이름</span>
+                <span>{finalOrder.username}</span>
+              </li>
+              <li>
+                <span>사용자 주소</span>
+                <span>{finalOrder.address}</span>
+              </li>
+              <li>
+                <span>배송 메모</span>
+                <span>{finalOrder.deliverymemo}</span>
+              </li>
+              <li>
+                <span>제품 명</span>
+                <span>{finalOrder.booname}</span>
+              </li>
+              <li>
+                <span>원가</span>
+                <span>₩ {finalOrder.originPirce.toLocaleString()}</span>
+              </li>
+              <li>
+                <span>할인가</span>
+                <span>₩ {finalOrder.SalePrice.toLocaleString()}</span>
+              </li>
+              <li>
+                <span>서비스 옵션</span>
+                <p>
+                  <span>{finalOrder.serviceOption}</span>
+                  <span>₩ {finalOrder.servicePrice.toLocaleString()}</span>
+                </p>
+              </li>
+              <li>
+                <span>코어옵션</span>
+                <p>
+                  <span>{finalOrder.coreOption}</span>
+                  <span>₩ {finalOrder.corePrice.toLocaleString()}</span>
+                </p>
+              </li>
+              <li>
+                <span>주문수량</span>
+                <span>{finalOrder.booCount}개</span>
+              </li>
+            </ul>
+            <div className="final_price">
+              <span>최종결산금액</span>
+              <span>₩ {finalOrder.totalPrice.toLocaleString()}</span>
+            </div>
+            <div className="modal_confirm">
+              <button onClick={() => handleFinalConfirmBtn()}>확인</button>
+              <button onClick={() => setConfirmModal(false)}>취소</button>
+            </div>
+          </div>
+        </ConfirmWrap>
+      )}
       <div className="inner">
-        <div className="title">주문/결제</div>
+        <div className="page_title">주문/결제</div>
         {buybooData.buyClass === "delivery" ? (
           <DeliveryInner>
             <div className="inner_title">배송주문</div>
@@ -282,7 +351,7 @@ const Order = ({ buybooData, setBuybooData }) => {
                     </div>
                     <div className="boo_price_box">
                       {orderBooData.salePrice &&
-                      orderBooData.salePrice !== orderBooData.price ? (
+                      originPriceData !== salePriceData ? (
                         <div className="mamber_price">
                           <p className="origin_price">
                             ₩ {totalPrice.toLocaleString()}
@@ -293,7 +362,11 @@ const Order = ({ buybooData, setBuybooData }) => {
                           </p>
                         </div>
                       ) : (
-                        <p className="price">₩ {totalPrice.toLocaleString()}</p>
+                        <div className="mamber_price">
+                          <p className="non_origin_price">
+                            ₩ {totalPrice.toLocaleString()}
+                          </p>
+                        </div>
                       )}
                     </div>
                     <div className="boo_qoute">{orderBooData.description}</div>
@@ -419,7 +492,6 @@ const Order = ({ buybooData, setBuybooData }) => {
                       </div>
                     ))}
                   </div>
-                  <button className="confirm_btn">결제등록</button>
                 </div>
               </div>
               <div className="order_price">
@@ -478,20 +550,20 @@ const Order = ({ buybooData, setBuybooData }) => {
                   {orderBooData.price !== orderBooData.salePrice ? (
                     <div className="total_price">
                       <span>총합</span>
-                      <span>₩ {slaeTotalPrice}</span>
+                      <span>₩ {slaeTotalPrice.toLocaleString()}</span>
                     </div>
                   ) : (
                     <div className="total_price">
                       <span>총합</span>
-                      <span>₩ {totalPrice}</span>
+                      <span>₩ {totalPrice.toLocaleString()}</span>
                     </div>
                   )}
                 </div>
                 <button
                   className="final_confirm"
-                  onClick={() => finalConfirmfunc()}
+                  onClick={() => finalConfirm()}
                 >
-                  구매하기
+                  결제
                 </button>
               </div>
             </div>

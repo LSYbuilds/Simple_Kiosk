@@ -9,10 +9,12 @@ import Main from "./page/main/Main";
 import Order from "./page/main/Order";
 import "./App.css";
 import { useState } from "react";
+import OrderConfirm from "./page/main/OrderConfirm";
 
 function App() {
   const [faction, setFaction] = useState([]);
   const [buybooData, setBuybooData] = useState(null);
+  const [finalOrder, setFinalOrder] = useState({});
   return (
     <Wrap>
       <Routes>
@@ -27,7 +29,22 @@ function App() {
           <Route
             path="/order"
             element={
-              <Order buybooData={buybooData} setBuybooData={setBuybooData} />
+              <Order
+                buybooData={buybooData}
+                setBuybooData={setBuybooData}
+                setFinalOrder={setFinalOrder}
+                finalOrder={finalOrder}
+              />
+            }
+          ></Route>
+          <Route
+            path="/orderconfirm"
+            element={
+              <OrderConfirm
+                faction={faction}
+                finalOrder={finalOrder}
+                buybooData={buybooData}
+              />
             }
           ></Route>
         </Route>

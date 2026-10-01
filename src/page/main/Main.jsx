@@ -324,7 +324,8 @@ const Main = ({ faction, setBuybooData }) => {
                         </div>
                       )}
                     </div>
-                    {thisBoo.salePrice ? (
+                    {thisBoo.salePrice &&
+                    thisBoo.price !== thisBoo.salePrice ? (
                       <div className="price">
                         <p className="origin_price">
                           W {thisBoo.price.toLocaleString()}
