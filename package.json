@@ -2,15 +2,19 @@
   "name": "kiosk",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://lsybuilds.github.io/Simple_Kiosk/",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.1",
+    "gh-pages": "^6.3.0",
     "motion": "^13.4.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

@@ -777,27 +777,19 @@ export const SelectedItem = styled(motion.div)`
 
     button {
       flex: 1;
-
       height: 64px;
-
       border: 0;
       border-radius: 14px;
-
       font-size: 18px;
       font-weight: 800;
-
       cursor: pointer;
-
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
         background 0.2s ease;
-
       &:first-child {
         background: #e8ebf2;
-
         color: #303746;
-
         &:hover {
           background: #dde1ea;
         }
