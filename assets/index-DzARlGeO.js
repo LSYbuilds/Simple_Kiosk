@@ -47,6 +47,33 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
       font-weight: 700;
     }
   }
+  @media (max-width: 1024px) {
+  }
+  @media (max-width: 737px) {
+    .logo_box {
+      display: flex;
+      justify-content: flex-start;
+      padding: 0px;
+      width: fit-content;
+      height: 100%;
+      overflow: hidden;
+      .logo {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        a {
+          width: 100%;
+          height: 100%;
+          img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+  }
 `,Fi=o((e=>{var t=Symbol.for(`react.transitional.element`),n=Symbol.for(`react.fragment`);function r(e,n,r){var i=null;if(r!==void 0&&(i=``+r),n.key!==void 0&&(i=``+n.key),`key`in n)for(var a in r={},n)a!==`key`&&(r[a]=n[a]);else r=n;return n=r.ref,{$$typeof:t,type:e,key:i,ref:n===void 0?null:n,props:r}}e.Fragment=n,e.jsx=r,e.jsxs=r})),z=o(((e,t)=>{t.exports=Fi()}))(),Ii=e=>`/Simple_Kiosk/${e.replace(/^\/+/,``)}`,Li=e=>{let t=(0,Hn.c)(3),{faction:n}=e,r;t[0]===Symbol.for(`react.memo_cache_sentinel`)?(r=(0,z.jsx)(`div`,{className:`logo_box`,children:(0,z.jsx)(`h1`,{className:`logo`,children:(0,z.jsx)(On,{to:`/`,children:(0,z.jsx)(`img`,{src:Ii(`/logo_b.png`),alt:`로고`})})})}),t[0]=r):r=t[0];let i;return t[1]===n.facname?i=t[2]:(i=(0,z.jsx)(Pi,{children:(0,z.jsxs)(`div`,{className:`inner`,children:[r,(0,z.jsx)(`div`,{className:`userInfo`,children:(0,z.jsx)(`p`,{children:(0,z.jsx)(`span`,{children:n.facname})})})]})}),t[1]=n.facname,t[2]=i),i},Ri=Mi.div`
   width: 100%;
   height: 100%;
@@ -256,9 +283,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     min-height: 100vh;
     width: 100%;
     overflow: hidden;
-
     background: #eef1f6;
-
     .hero_section {
       width: 100%;
       padding: 20px;
@@ -321,7 +346,6 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
         display: flex;
         gap: 14px;
         height: 54px;
-
         li {
           position: relative;
           width: 20%;
@@ -366,18 +390,13 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
               box-shadow: 0 5px 15px rgba(70, 80, 180, 0.08);
             }
           }
-
           .sort_list {
             position: absolute;
             z-index: 800;
-
             top: 0;
             left: 0;
-
             padding-top: 54px;
-
             width: 100%;
-
             display: flex;
             flex-direction: column;
             gap: 4px;
@@ -604,6 +623,64 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
       }
     }
   }
+  @media (max-width: 1024px) {
+    .inner .list_section {
+      .list_grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+  @media (max-width: 737px) {
+    .inner .hero_section {
+      .event_banner {
+        P {
+          width: 80%;
+          font-size: 1.5em;
+        }
+      }
+    }
+
+    .inner .list_section {
+      .category {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: auto;
+        li {
+          flex: 0 0 100%;
+          height: auto;
+          .title {
+            width: 100%;
+            height: 40px;
+            justify-content: space-between;
+            padding: 0px 5%;
+            svg {
+              position: static;
+            }
+          }
+          .sort_list {
+            position: static;
+            padding: 0px;
+          }
+          &:nth-of-type(1) {
+            .title {
+              justify-content: center;
+            }
+          }
+        }
+      }
+      .list_grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+  @media (max-width: 460px) {
+    .inner .list_section {
+      .list_grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
 `,Ah=Mi(Oh.div)`
   position: fixed;
   inset: 0;
@@ -674,6 +751,16 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
     &::-webkit-scrollbar-track {
       background: transparent;
     }
+  }
+
+  /* =========================
+     닫기 버튼
+  ========================= */
+  .close_btn {
+    display: none;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 30px;
   }
 
   /* =========================
@@ -1098,29 +1185,39 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
   ========================= */
 
   @media (max-width: 737px) {
+    .close_btn {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-bottom: 30px;
+      button {
+        width: 30px;
+        height: 30px;
+        border: none;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
     .selected_item_info {
       right: 0;
-
       width: 100%;
-
       padding: 25px 20px;
     }
-
     .basicInfo_box {
       gap: 18px;
     }
-
     .boo_img_box {
       flex-basis: 130px;
 
       width: 130px;
       height: 130px;
     }
-
     .boo_name_box .boo_name {
       font-size: 23px;
     }
-
     .desetext {
       font-size: 15px;
     }
@@ -1202,7 +1299,7 @@ Please change the parent <Route path="${e}"> to <Route path="${e===`/`?`*`:`${e}
       }
     }
   }
-`,ev=e=>{let t=(0,Hn.c)(95),{faction:n,setBuybooData:r}=e,[i,a]=(0,x.useState)(null),[o,s]=(0,x.useState)(!1),[c,l]=(0,x.useState)(null),[u,d]=(0,x.useState)(jh.bangbooList),f;t[0]===Symbol.for(`react.memo_cache_sentinel`)?(f=[],t[0]=f):f=t[0];let[p,m]=(0,x.useState)(f),h=ht(),g=tv,_;t[1]===n.facename?_=t[2]:(_=()=>{let e;return e=n.facename===`proxy`?jh.bangbooList.map(nv):jh.bangbooList.map(e=>({...e,salePrice:e.saleFaction===n.facename?n.facename===`private`?Math.floor(e.price*.7):n.facename===`public`?Math.floor(e.price*.5):e.price:e.price})),e},t[1]=n.facename,t[2]=_);let v=_,y=iv,b;t[3]===v?b=t[4]:(b=()=>{d(v())},t[3]=v,t[4]=b);let S=b,C;t[5]===v?C=t[6]:(C=e=>{let t=v().filter(t=>t.element===e);d(t)},t[5]=v,t[6]=C);let w=C,T;t[7]===v?T=t[8]:(T=e=>{let t=v().filter(t=>t.rarity===e);d(t)},t[7]=v,t[8]=T);let ee=T,E;t[9]===v?E=t[10]:(E=()=>{let e=[...v()].sort(av);d(e)},t[9]=v,t[10]=E);let D=E,O;t[11]===v?O=t[12]:(O=()=>{let e=[...v()].sort(ov);d(e)},t[11]=v,t[12]=O);let k=O,A;t[13]!==h||t[14]!==r||t[15]!==i?(A=()=>{let e={...i,buyClass:`delivery`};r(e),h(`/order`)},t[13]=h,t[14]=r,t[15]=i,t[16]=A):A=t[16];let te=A,j;t[17]!==h||t[18]!==r||t[19]!==i?(j=()=>{let e={...i,buyClass:`site`};r(e),h(`/order`)},t[17]=h,t[18]=r,t[19]=i,t[20]=j):j=t[20];let ne=j,re;t[21]!==n||t[22]!==v?(re=()=>{let e=v(),t=y(e);console.log(`현재 faction:`,n),console.log(`할인 데이터:`,e),console.log(`세일하는 부만`,t),d(e),m(t)},t[21]=n,t[22]=v,t[23]=re):re=t[23];let ie;t[24]===n?ie=t[25]:(ie=[n],t[24]=n,t[25]=ie),(0,x.useEffect)(re,ie),console.log(`펙션`,n),console.log(i),console.log(c);let ae,oe;t[26]===o?(ae=t[27],oe=t[28]):(ae=()=>(document.body.style.overflow=o?`hidden`:``,sv),oe=[o],t[26]=o,t[27]=ae,t[28]=oe),(0,x.useEffect)(ae,oe);let se;t[29]===Symbol.for(`react.memo_cache_sentinel`)?(se=(0,z.jsx)(`section`,{className:`hero_section`,children:(0,z.jsx)(`div`,{className:`event_banner`,children:(0,z.jsx)(`p`,{children:`로스캘리퍼 방부넷에 회원가입하여 할인혜택을 누려보세요`})})}),t[29]=se):se=t[29];let ce;t[30]===S?ce=t[31]:(ce=()=>S(),t[30]=S,t[31]=ce);let le;t[32]===Symbol.for(`react.memo_cache_sentinel`)?(le=(0,z.jsx)(`p`,{className:`title`,children:`전체`}),t[32]=le):le=t[32];let ue;t[33]===ce?ue=t[34]:(ue=(0,z.jsx)(`li`,{onClick:ce,children:le}),t[33]=ce,t[34]=ue);let de;t[35]===c?de=t[36]:(de=()=>l(c===`element`?null:`element`),t[35]=c,t[36]=de);let fe;t[37]===Symbol.for(`react.memo_cache_sentinel`)?(fe=(0,z.jsxs)(`p`,{className:`title`,children:[`원소별 `,(0,z.jsx)(B.sort,{})]}),t[37]=fe):fe=t[37];let pe;t[38]!==c||t[39]!==w?(pe=c===`element`&&(0,z.jsxs)(Oh.ul,{className:`sort_list`,children:[(0,z.jsx)(`li`,{onClick:()=>w(`물리`),children:`물리`}),(0,z.jsx)(`li`,{onClick:()=>w(`불`),children:`불`}),(0,z.jsx)(`li`,{onClick:()=>w(`전기`),children:`전기`}),(0,z.jsx)(`li`,{onClick:()=>w(`얼음`),children:`얼음`}),(0,z.jsx)(`li`,{onClick:()=>w(`에테르`),children:`에테르`})]}),t[38]=c,t[39]=w,t[40]=pe):pe=t[40];let me;t[41]===pe?me=t[42]:(me=(0,z.jsx)(Ip,{children:pe}),t[41]=pe,t[42]=me);let he;t[43]!==de||t[44]!==me?(he=(0,z.jsxs)(`li`,{onClick:de,children:[fe,me]}),t[43]=de,t[44]=me,t[45]=he):he=t[45];let ge;t[46]===c?ge=t[47]:(ge=()=>l(c===`rank`?null:`rank`),t[46]=c,t[47]=ge);let _e;t[48]===Symbol.for(`react.memo_cache_sentinel`)?(_e=(0,z.jsxs)(`p`,{className:`title`,children:[`랭크순 `,(0,z.jsx)(B.sort,{})]}),t[48]=_e):_e=t[48];let ve;t[49]!==c||t[50]!==ee?(ve=c===`rank`&&(0,z.jsxs)(`ul`,{className:`sort_list`,children:[(0,z.jsx)(`li`,{onClick:()=>ee(5),children:`5성`}),(0,z.jsx)(`li`,{onClick:()=>ee(4),children:`4성`})]}),t[49]=c,t[50]=ee,t[51]=ve):ve=t[51];let M;t[52]===ve?M=t[53]:(M=(0,z.jsx)(Ip,{children:ve}),t[52]=ve,t[53]=M);let N;t[54]!==ge||t[55]!==M?(N=(0,z.jsxs)(`li`,{onClick:ge,children:[_e,M]}),t[54]=ge,t[55]=M,t[56]=N):N=t[56];let ye;t[57]===c?ye=t[58]:(ye=()=>l(c===`price`?null:`price`),t[57]=c,t[58]=ye);let be;t[59]===Symbol.for(`react.memo_cache_sentinel`)?(be=(0,z.jsxs)(`p`,{className:`title`,children:[`가격순 `,(0,z.jsx)(B.sort,{})]}),t[59]=be):be=t[59];let xe;t[60]!==c||t[61]!==D||t[62]!==k?(xe=c===`price`&&(0,z.jsxs)(`ul`,{className:`sort_list`,children:[(0,z.jsx)(`li`,{onClick:()=>D(),children:`높은순`}),(0,z.jsx)(`li`,{onClick:()=>k(),children:`낮은순`})]}),t[60]=c,t[61]=D,t[62]=k,t[63]=xe):xe=t[63];let Se;t[64]===xe?Se=t[65]:(Se=(0,z.jsx)(Ip,{children:xe}),t[64]=xe,t[65]=Se);let P;t[66]!==ye||t[67]!==Se?(P=(0,z.jsxs)(`li`,{onClick:ye,children:[be,Se]}),t[66]=ye,t[67]=Se,t[68]=P):P=t[68];let F;t[69]!==ue||t[70]!==he||t[71]!==N||t[72]!==P?(F=(0,z.jsxs)(`ul`,{className:`category`,children:[ue,he,N,P]}),t[69]=ue,t[70]=he,t[71]=N,t[72]=P,t[73]=F):F=t[73];let Ce;t[74]===p?Ce=t[75]:(Ce=p.length===0?(0,z.jsxs)(`div`,{className:`sale_list_box`,children:[(0,z.jsx)(`p`,{className:`sale_title`,children:`현재 할인중인 BANGBOO`}),(0,z.jsx)(`div`,{children:`로스캘리퍼 방부넷에 회원가입하여 할인혜택을 누려보세요`})]}):(0,z.jsxs)(`div`,{className:`sale_list_box`,children:[(0,z.jsx)(`p`,{className:`sale_title`,children:`현재 할인중인 BANGBOO`}),(0,z.jsx)($_,{slidesPerView:8,spaceBetween:8,children:p.map((e,t)=>(0,z.jsxs)(Q_,{className:`boo_img ${e.rarity===5?`gold`:`pup`}`,onClick:()=>{a(e),s(cv)},children:[(0,z.jsx)(`div`,{className:`sale_boo_img`,children:(0,z.jsx)(`img`,{src:g(e.src),alt:``})}),(0,z.jsx)(`div`,{className:`sale_boo_name`,children:e.name})]},t))})]}),t[74]=p,t[75]=Ce);let we;if(t[76]!==u){let e;t[78]===Symbol.for(`react.memo_cache_sentinel`)?(e=e=>(0,z.jsxs)(`li`,{onClick:()=>{a(e),s(lv)},children:[(0,z.jsxs)(`div`,{className:`boo_img ${e.rarity===5?`gold`:`pup`}`,children:[(0,z.jsx)(`img`,{src:g(e.src),alt:`bangboo 이미지`}),(0,z.jsx)(`span`,{className:`eng_name`,children:e.id})]}),(0,z.jsxs)(`div`,{className:`boo_desc`,children:[e.rarity===5?(0,z.jsxs)(`div`,{className:`star_box`,children:[(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{})]}):(0,z.jsxs)(`div`,{className:`star_box`,children:[(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{})]}),(0,z.jsx)(`p`,{className:`boo_name`,children:e.name}),e.salePrice?e.price===e.salePrice?(0,z.jsx)(`div`,{className:`price_box`,children:(0,z.jsxs)(`p`,{className:`price`,children:[`₩ `,e.price.toLocaleString()]})}):(0,z.jsxs)(`div`,{className:`price_box`,children:[(0,z.jsxs)(`p`,{className:`origin_price`,children:[`₩ `,e.price.toLocaleString()]}),(0,z.jsxs)(`p`,{className:`sale_price`,children:[`₩ `,e.salePrice.toLocaleString()]})]}):(0,z.jsx)(`div`,{className:`price_box`,children:(0,z.jsxs)(`p`,{className:`price`,children:[`₩ `,e.price.toLocaleString()]})})]})]},e.id),t[78]=e):e=t[78],we=u.map(e),t[76]=u,t[77]=we}else we=t[77];let Te;t[79]===we?Te=t[80]:(Te=(0,z.jsx)(`ul`,{className:`list_grid`,children:we}),t[79]=we,t[80]=Te);let Ee;t[81]!==F||t[82]!==Ce||t[83]!==Te?(Ee=(0,z.jsxs)(`section`,{className:`list_section`,children:[F,Ce,Te]}),t[81]=F,t[82]=Ce,t[83]=Te,t[84]=Ee):Ee=t[84];let De;t[85]!==ne||t[86]!==te||t[87]!==o||t[88]!==i?(De=o&&(0,z.jsxs)(Ah,{className:`selected_item`,children:[(0,z.jsx)(Oh.div,{className:`selected_bg`,initial:{opacity:0},animate:{opacity:1},exit:{opacity:0},transition:{duration:.25},onClick:()=>s(!1)}),(0,z.jsxs)(Oh.div,{className:`selected_item_info`,initial:{x:`200%`,opacity:0},animate:{x:0,opacity:1},exit:{x:`200%`,opacity:0},transition:{duration:.5,ease:[.22,1,.36,1]},children:[(0,z.jsxs)(`div`,{className:`basicInfo_box`,children:[(0,z.jsx)(`div`,{className:`boo_img_box`,children:(0,z.jsx)(`img`,{src:g(i.src),alt:``})}),(0,z.jsxs)(`div`,{className:`boo_info_box`,children:[(0,z.jsx)(`div`,{className:`boo_name_box`,children:(0,z.jsx)(`p`,{className:`boo_name`,children:i.name})}),(0,z.jsxs)(`div`,{className:`desetext`,children:[(0,z.jsx)(`p`,{children:i.quote}),(0,z.jsx)(`p`,{children:i.shortDesc})]}),(0,z.jsx)(`div`,{className:`rank`,children:i.rarity===5?(0,z.jsxs)(`div`,{className:`star_box`,children:[(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{})]}):(0,z.jsxs)(`div`,{className:`star_box`,children:[(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{})]})}),i.salePrice&&i.price!==i.salePrice?(0,z.jsxs)(`div`,{className:`price`,children:[(0,z.jsxs)(`p`,{className:`origin_price`,children:[`W `,i.price.toLocaleString()]}),(0,z.jsxs)(`p`,{children:[`W `,i.salePrice.toLocaleString()]})]}):(0,z.jsx)(`div`,{className:`price`,children:(0,z.jsxs)(`p`,{children:[`W `,i.price.toLocaleString()]})})]})]}),(0,z.jsxs)(`div`,{className:`detail_box`,children:[(0,z.jsxs)(`div`,{className:`detail_Info`,children:[(0,z.jsx)(`p`,{children:`상세`}),(0,z.jsx)(`p`,{children:i.description}),(0,z.jsx)(`p`,{children:`성격`}),(0,z.jsx)(`p`,{children:i.personality})]}),(0,z.jsxs)(`div`,{className:`skills_box`,children:[(0,z.jsxs)(`div`,{className:`active_skills`,children:[(0,z.jsxs)(`div`,{className:`icon`,children:[(0,z.jsx)(B.sword,{}),(0,z.jsx)(`p`,{children:`액티브`})]}),(0,z.jsx)(`div`,{className:`skills_info`,children:i.skills.active})]}),(0,z.jsxs)(`div`,{className:`passive_skills`,children:[(0,z.jsxs)(`div`,{className:`icon`,children:[(0,z.jsx)(B.shield,{}),(0,z.jsx)(`p`,{children:`패시브`})]}),(0,z.jsx)(`div`,{className:`skills_info`,children:i.skills.passive})]})]}),(0,z.jsxs)(`div`,{className:`stats_box`,children:[(0,z.jsx)(`div`,{className:`title`,children:`스텟`}),(0,z.jsxs)(`ul`,{className:`stats_list`,children:[(0,z.jsxs)(`li`,{children:[(0,z.jsx)(B.attack,{}),i.stats.attack]}),(0,z.jsxs)(`li`,{children:[(0,z.jsx)(B.support,{}),i.stats.support]}),(0,z.jsxs)(`li`,{children:[(0,z.jsx)(B.speed,{}),i.stats.speed]}),(0,z.jsxs)(`li`,{children:[(0,z.jsx)(B.defense,{}),i.stats.defense]})]})]}),(0,z.jsxs)(`div`,{className:`buy_buttons`,children:[(0,z.jsx)(`button`,{onClick:()=>ne(),children:`현장구매`}),(0,z.jsx)(`button`,{onClick:()=>te(),children:`배송구매`})]})]})]})]}),t[85]=ne,t[86]=te,t[87]=o,t[88]=i,t[89]=De):De=t[89];let Oe;t[90]===De?Oe=t[91]:(Oe=(0,z.jsx)(Ip,{children:De}),t[90]=De,t[91]=Oe);let ke;return t[92]!==Ee||t[93]!==Oe?(ke=(0,z.jsx)(kh,{children:(0,z.jsxs)(`div`,{className:`inner`,children:[se,Ee,Oe]})}),t[92]=Ee,t[93]=Oe,t[94]=ke):ke=t[94],ke};function tv(e){return`/Simple_Kiosk/${e.replace(/^\/+/,``)}`}function nv(e){return{...e,salePrice:Math.floor(e.price*.8)}}function rv(e){return e.salePrice&&e.salePrice<e.price}function iv(e){return e.filter(rv)}function av(e,t){return t.price-e.price}function ov(e,t){return e.price-t.price}function sv(){document.body.style.overflow=``}function cv(e){return!e}function lv(e){return!e}var uv=Mi.div`
+`,ev=e=>{let t=(0,Hn.c)(95),{faction:n,setBuybooData:r}=e,[i,a]=(0,x.useState)(null),[o,s]=(0,x.useState)(!1),[c,l]=(0,x.useState)(null),[u,d]=(0,x.useState)(jh.bangbooList),f;t[0]===Symbol.for(`react.memo_cache_sentinel`)?(f=[],t[0]=f):f=t[0];let[p,m]=(0,x.useState)(f),h=ht(),g=tv,_;t[1]===n.facename?_=t[2]:(_=()=>{let e;return e=n.facename===`proxy`?jh.bangbooList.map(nv):jh.bangbooList.map(e=>({...e,salePrice:e.saleFaction===n.facename?n.facename===`private`?Math.floor(e.price*.7):n.facename===`public`?Math.floor(e.price*.5):e.price:e.price})),e},t[1]=n.facename,t[2]=_);let v=_,y=iv,b;t[3]===v?b=t[4]:(b=()=>{d(v())},t[3]=v,t[4]=b);let S=b,C;t[5]===v?C=t[6]:(C=e=>{let t=v().filter(t=>t.element===e);d(t)},t[5]=v,t[6]=C);let w=C,T;t[7]===v?T=t[8]:(T=e=>{let t=v().filter(t=>t.rarity===e);d(t)},t[7]=v,t[8]=T);let ee=T,E;t[9]===v?E=t[10]:(E=()=>{let e=[...v()].sort(av);d(e)},t[9]=v,t[10]=E);let D=E,O;t[11]===v?O=t[12]:(O=()=>{let e=[...v()].sort(ov);d(e)},t[11]=v,t[12]=O);let k=O,A;t[13]!==h||t[14]!==r||t[15]!==i?(A=()=>{let e={...i,buyClass:`delivery`};r(e),h(`/order`)},t[13]=h,t[14]=r,t[15]=i,t[16]=A):A=t[16];let te=A,j;t[17]!==h||t[18]!==r||t[19]!==i?(j=()=>{let e={...i,buyClass:`site`};r(e),h(`/order`)},t[17]=h,t[18]=r,t[19]=i,t[20]=j):j=t[20];let ne=j,re;t[21]!==n||t[22]!==v?(re=()=>{let e=v(),t=y(e);console.log(`현재 faction:`,n),console.log(`할인 데이터:`,e),console.log(`세일하는 부만`,t),d(e),m(t)},t[21]=n,t[22]=v,t[23]=re):re=t[23];let ie;t[24]===n?ie=t[25]:(ie=[n],t[24]=n,t[25]=ie),(0,x.useEffect)(re,ie),console.log(`펙션`,n),console.log(i),console.log(c);let ae,oe;t[26]===o?(ae=t[27],oe=t[28]):(ae=()=>(document.body.style.overflow=o?`hidden`:``,sv),oe=[o],t[26]=o,t[27]=ae,t[28]=oe),(0,x.useEffect)(ae,oe);let se;t[29]===Symbol.for(`react.memo_cache_sentinel`)?(se=(0,z.jsx)(`section`,{className:`hero_section`,children:(0,z.jsx)(`div`,{className:`event_banner`,children:(0,z.jsx)(`p`,{children:`로스캘리퍼 방부넷에 회원가입하여 할인혜택을 누려보세요`})})}),t[29]=se):se=t[29];let ce;t[30]===S?ce=t[31]:(ce=()=>S(),t[30]=S,t[31]=ce);let le;t[32]===Symbol.for(`react.memo_cache_sentinel`)?(le=(0,z.jsx)(`p`,{className:`title`,children:`전체`}),t[32]=le):le=t[32];let ue;t[33]===ce?ue=t[34]:(ue=(0,z.jsx)(`li`,{onClick:ce,children:le}),t[33]=ce,t[34]=ue);let de;t[35]===c?de=t[36]:(de=()=>l(c===`element`?null:`element`),t[35]=c,t[36]=de);let fe;t[37]===Symbol.for(`react.memo_cache_sentinel`)?(fe=(0,z.jsxs)(`p`,{className:`title`,children:[`원소별 `,(0,z.jsx)(B.sort,{})]}),t[37]=fe):fe=t[37];let pe;t[38]!==c||t[39]!==w?(pe=c===`element`&&(0,z.jsxs)(Oh.ul,{className:`sort_list`,children:[(0,z.jsx)(`li`,{onClick:()=>w(`물리`),children:`물리`}),(0,z.jsx)(`li`,{onClick:()=>w(`불`),children:`불`}),(0,z.jsx)(`li`,{onClick:()=>w(`전기`),children:`전기`}),(0,z.jsx)(`li`,{onClick:()=>w(`얼음`),children:`얼음`}),(0,z.jsx)(`li`,{onClick:()=>w(`에테르`),children:`에테르`})]}),t[38]=c,t[39]=w,t[40]=pe):pe=t[40];let me;t[41]===pe?me=t[42]:(me=(0,z.jsx)(Ip,{children:pe}),t[41]=pe,t[42]=me);let he;t[43]!==de||t[44]!==me?(he=(0,z.jsxs)(`li`,{onClick:de,children:[fe,me]}),t[43]=de,t[44]=me,t[45]=he):he=t[45];let ge;t[46]===c?ge=t[47]:(ge=()=>l(c===`rank`?null:`rank`),t[46]=c,t[47]=ge);let _e;t[48]===Symbol.for(`react.memo_cache_sentinel`)?(_e=(0,z.jsxs)(`p`,{className:`title`,children:[`랭크순 `,(0,z.jsx)(B.sort,{})]}),t[48]=_e):_e=t[48];let ve;t[49]!==c||t[50]!==ee?(ve=c===`rank`&&(0,z.jsxs)(`ul`,{className:`sort_list`,children:[(0,z.jsx)(`li`,{onClick:()=>ee(5),children:`5성`}),(0,z.jsx)(`li`,{onClick:()=>ee(4),children:`4성`})]}),t[49]=c,t[50]=ee,t[51]=ve):ve=t[51];let M;t[52]===ve?M=t[53]:(M=(0,z.jsx)(Ip,{children:ve}),t[52]=ve,t[53]=M);let N;t[54]!==ge||t[55]!==M?(N=(0,z.jsxs)(`li`,{onClick:ge,children:[_e,M]}),t[54]=ge,t[55]=M,t[56]=N):N=t[56];let ye;t[57]===c?ye=t[58]:(ye=()=>l(c===`price`?null:`price`),t[57]=c,t[58]=ye);let be;t[59]===Symbol.for(`react.memo_cache_sentinel`)?(be=(0,z.jsxs)(`p`,{className:`title`,children:[`가격순 `,(0,z.jsx)(B.sort,{})]}),t[59]=be):be=t[59];let xe;t[60]!==c||t[61]!==D||t[62]!==k?(xe=c===`price`&&(0,z.jsxs)(`ul`,{className:`sort_list`,children:[(0,z.jsx)(`li`,{onClick:()=>D(),children:`높은순`}),(0,z.jsx)(`li`,{onClick:()=>k(),children:`낮은순`})]}),t[60]=c,t[61]=D,t[62]=k,t[63]=xe):xe=t[63];let Se;t[64]===xe?Se=t[65]:(Se=(0,z.jsx)(Ip,{children:xe}),t[64]=xe,t[65]=Se);let P;t[66]!==ye||t[67]!==Se?(P=(0,z.jsxs)(`li`,{onClick:ye,children:[be,Se]}),t[66]=ye,t[67]=Se,t[68]=P):P=t[68];let F;t[69]!==ue||t[70]!==he||t[71]!==N||t[72]!==P?(F=(0,z.jsxs)(`ul`,{className:`category`,children:[ue,he,N,P]}),t[69]=ue,t[70]=he,t[71]=N,t[72]=P,t[73]=F):F=t[73];let Ce;t[74]===p?Ce=t[75]:(Ce=p.length===0?(0,z.jsxs)(`div`,{className:`sale_list_box`,children:[(0,z.jsx)(`p`,{className:`sale_title`,children:`현재 할인중인 BANGBOO`}),(0,z.jsx)(`div`,{children:`로스캘리퍼 방부넷에 회원가입하여 할인혜택을 누려보세요`})]}):(0,z.jsxs)(`div`,{className:`sale_list_box`,children:[(0,z.jsx)(`p`,{className:`sale_title`,children:`현재 할인중인 BANGBOO`}),(0,z.jsx)($_,{slidesPerView:8,spaceBetween:8,children:p.map((e,t)=>(0,z.jsxs)(Q_,{className:`boo_img ${e.rarity===5?`gold`:`pup`}`,onClick:()=>{a(e),s(cv)},children:[(0,z.jsx)(`div`,{className:`sale_boo_img`,children:(0,z.jsx)(`img`,{src:g(e.src),alt:``})}),(0,z.jsx)(`div`,{className:`sale_boo_name`,children:e.name})]},t))})]}),t[74]=p,t[75]=Ce);let we;if(t[76]!==u){let e;t[78]===Symbol.for(`react.memo_cache_sentinel`)?(e=e=>(0,z.jsxs)(`li`,{onClick:()=>{a(e),s(lv)},children:[(0,z.jsxs)(`div`,{className:`boo_img ${e.rarity===5?`gold`:`pup`}`,children:[(0,z.jsx)(`img`,{src:g(e.src),alt:`bangboo 이미지`}),(0,z.jsx)(`span`,{className:`eng_name`,children:e.id})]}),(0,z.jsxs)(`div`,{className:`boo_desc`,children:[e.rarity===5?(0,z.jsxs)(`div`,{className:`star_box`,children:[(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{})]}):(0,z.jsxs)(`div`,{className:`star_box`,children:[(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{})]}),(0,z.jsx)(`p`,{className:`boo_name`,children:e.name}),e.salePrice?e.price===e.salePrice?(0,z.jsx)(`div`,{className:`price_box`,children:(0,z.jsxs)(`p`,{className:`price`,children:[`₩ `,e.price.toLocaleString()]})}):(0,z.jsxs)(`div`,{className:`price_box`,children:[(0,z.jsxs)(`p`,{className:`origin_price`,children:[`₩ `,e.price.toLocaleString()]}),(0,z.jsxs)(`p`,{className:`sale_price`,children:[`₩ `,e.salePrice.toLocaleString()]})]}):(0,z.jsx)(`div`,{className:`price_box`,children:(0,z.jsxs)(`p`,{className:`price`,children:[`₩ `,e.price.toLocaleString()]})})]})]},e.id),t[78]=e):e=t[78],we=u.map(e),t[76]=u,t[77]=we}else we=t[77];let Te;t[79]===we?Te=t[80]:(Te=(0,z.jsx)(`ul`,{className:`list_grid`,children:we}),t[79]=we,t[80]=Te);let Ee;t[81]!==F||t[82]!==Ce||t[83]!==Te?(Ee=(0,z.jsxs)(`section`,{className:`list_section`,children:[F,Ce,Te]}),t[81]=F,t[82]=Ce,t[83]=Te,t[84]=Ee):Ee=t[84];let De;t[85]!==ne||t[86]!==te||t[87]!==o||t[88]!==i?(De=o&&(0,z.jsxs)(Ah,{className:`selected_item`,children:[(0,z.jsx)(Oh.div,{className:`selected_bg`,initial:{opacity:0},animate:{opacity:1},exit:{opacity:0},transition:{duration:.25},onClick:()=>s(!1)}),(0,z.jsxs)(Oh.div,{className:`selected_item_info`,initial:{x:`200%`,opacity:0},animate:{x:0,opacity:1},exit:{x:`200%`,opacity:0},transition:{duration:.5,ease:[.22,1,.36,1]},children:[(0,z.jsx)(`div`,{className:`close_btn`,children:(0,z.jsx)(`button`,{onClick:()=>s(!1),children:(0,z.jsx)(B.close,{})})}),(0,z.jsxs)(`div`,{className:`basicInfo_box`,children:[(0,z.jsx)(`div`,{className:`boo_img_box`,children:(0,z.jsx)(`img`,{src:g(i.src),alt:``})}),(0,z.jsxs)(`div`,{className:`boo_info_box`,children:[(0,z.jsx)(`div`,{className:`boo_name_box`,children:(0,z.jsx)(`p`,{className:`boo_name`,children:i.name})}),(0,z.jsxs)(`div`,{className:`desetext`,children:[(0,z.jsx)(`p`,{children:i.quote}),(0,z.jsx)(`p`,{children:i.shortDesc})]}),(0,z.jsx)(`div`,{className:`rank`,children:i.rarity===5?(0,z.jsxs)(`div`,{className:`star_box`,children:[(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{})]}):(0,z.jsxs)(`div`,{className:`star_box`,children:[(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{}),(0,z.jsx)(B.star,{})]})}),i.salePrice&&i.price!==i.salePrice?(0,z.jsxs)(`div`,{className:`price`,children:[(0,z.jsxs)(`p`,{className:`origin_price`,children:[`W `,i.price.toLocaleString()]}),(0,z.jsxs)(`p`,{children:[`W `,i.salePrice.toLocaleString()]})]}):(0,z.jsx)(`div`,{className:`price`,children:(0,z.jsxs)(`p`,{children:[`W `,i.price.toLocaleString()]})})]})]}),(0,z.jsxs)(`div`,{className:`detail_box`,children:[(0,z.jsxs)(`div`,{className:`detail_Info`,children:[(0,z.jsx)(`p`,{children:`상세`}),(0,z.jsx)(`p`,{children:i.description}),(0,z.jsx)(`p`,{children:`성격`}),(0,z.jsx)(`p`,{children:i.personality})]}),(0,z.jsxs)(`div`,{className:`skills_box`,children:[(0,z.jsxs)(`div`,{className:`active_skills`,children:[(0,z.jsxs)(`div`,{className:`icon`,children:[(0,z.jsx)(B.sword,{}),(0,z.jsx)(`p`,{children:`액티브`})]}),(0,z.jsx)(`div`,{className:`skills_info`,children:i.skills.active})]}),(0,z.jsxs)(`div`,{className:`passive_skills`,children:[(0,z.jsxs)(`div`,{className:`icon`,children:[(0,z.jsx)(B.shield,{}),(0,z.jsx)(`p`,{children:`패시브`})]}),(0,z.jsx)(`div`,{className:`skills_info`,children:i.skills.passive})]})]}),(0,z.jsxs)(`div`,{className:`stats_box`,children:[(0,z.jsx)(`div`,{className:`title`,children:`스텟`}),(0,z.jsxs)(`ul`,{className:`stats_list`,children:[(0,z.jsxs)(`li`,{children:[(0,z.jsx)(B.attack,{}),i.stats.attack]}),(0,z.jsxs)(`li`,{children:[(0,z.jsx)(B.support,{}),i.stats.support]}),(0,z.jsxs)(`li`,{children:[(0,z.jsx)(B.speed,{}),i.stats.speed]}),(0,z.jsxs)(`li`,{children:[(0,z.jsx)(B.defense,{}),i.stats.defense]})]})]}),(0,z.jsxs)(`div`,{className:`buy_buttons`,children:[(0,z.jsx)(`button`,{onClick:()=>ne(),children:`현장구매`}),(0,z.jsx)(`button`,{onClick:()=>te(),children:`배송구매`})]})]})]})]}),t[85]=ne,t[86]=te,t[87]=o,t[88]=i,t[89]=De):De=t[89];let Oe;t[90]===De?Oe=t[91]:(Oe=(0,z.jsx)(Ip,{children:De}),t[90]=De,t[91]=Oe);let ke;return t[92]!==Ee||t[93]!==Oe?(ke=(0,z.jsx)(kh,{children:(0,z.jsxs)(`div`,{className:`inner`,children:[se,Ee,Oe]})}),t[92]=Ee,t[93]=Oe,t[94]=ke):ke=t[94],ke};function tv(e){return`/Simple_Kiosk/${e.replace(/^\/+/,``)}`}function nv(e){return{...e,salePrice:Math.floor(e.price*.8)}}function rv(e){return e.salePrice&&e.salePrice<e.price}function iv(e){return e.filter(rv)}function av(e,t){return t.price-e.price}function ov(e,t){return e.price-t.price}function sv(){document.body.style.overflow=``}function cv(e){return!e}function lv(e){return!e}var uv=Mi.div`
   width: 100%;
   min-height: 100vh;
   .inner {
