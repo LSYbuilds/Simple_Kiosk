@@ -100,13 +100,16 @@ const Main = ({ faction, setBuybooData }) => {
   };
   // 현장구매
   const handleSite = () => {
-    const siteBuy = {
-      ...thisBoo,
-      buyClass: "site",
-    };
-    setBuybooData(siteBuy);
-    navigate("/order");
+    alert("서비스 준비중입니다.");
   };
+  // const handleSite = () => {
+  //   const siteBuy = {
+  //     ...thisBoo,
+  //     buyClass: "site",
+  //   };
+  //   setBuybooData(siteBuy);
+  //   navigate("/order");
+  // };
 
   // 펙션별 세일 이펙트
   useEffect(() => {

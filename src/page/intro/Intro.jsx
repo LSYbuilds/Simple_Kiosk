@@ -25,6 +25,9 @@ const Intro = ({ setFaction }) => {
       navigate("/main");
     }
   };
+  const handleSignin = () => {
+    alert("서비스 준비중 입니다 비회원으로 이용하시길 바랍니다");
+  };
   const publicPath = (path) => {
     return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
   };
@@ -158,7 +161,11 @@ const Intro = ({ setFaction }) => {
                   </div>
 
                   <div className="mamber_select">
-                    <button type="button" className="member">
+                    <button
+                      type="button"
+                      className="member"
+                      onClick={() => handleSignin()}
+                    >
                       회원가입
                     </button>
                     <button
