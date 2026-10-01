@@ -11,6 +11,13 @@ import Icon from "../../components/SvgComponents";
 import { number } from "motion";
 
 const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
+  // 네비게이트
+  const navigate = useNavigate();
+  // 주문 데이터가 없으면 바로 메인으로
+  if (!buybooData) {
+    navigate("/main", { replace: true });
+    return null;
+  }
   const boodata = buybooData;
   // 부데이터 전부
   const [orderBooData, setOrderBooData] = useState(boodata);
@@ -38,7 +45,7 @@ const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
   const [detailInfo, setDetailInfo] = useState(false);
   // 최종주문데이터 모달
   const [confirmModal, setConfirmModal] = useState(false);
-  const navigate = useNavigate();
+
   // 정규식
   const publicPath = (path) => {
     return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
@@ -246,6 +253,7 @@ const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
   const handleFinalConfirmBtn = () => {
     navigate("/orderconfirm");
   };
+
   return (
     <OrderWrap>
       {confirmModal && (
@@ -314,7 +322,7 @@ const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
       )}
       <div className="inner">
         <div className="page_title">주문/결제</div>
-        {buybooData.buyClass === "delivery" ? (
+        {buybooData.buyClass === "delivery" && buybooData ? (
           <DeliveryInner>
             <div className="inner_title">배송주문</div>
             <div className="flex_row">
@@ -588,7 +596,7 @@ const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
               </div>
             </div>
           </DeliveryInner>
-        ) : buybooData.buyClass === "site" ? (
+        ) : buybooData.buyClass === "site" && buybooData ? (
           <SiteBuyInner>현장</SiteBuyInner>
         ) : (
           <EmptyInner>비어있음</EmptyInner>
