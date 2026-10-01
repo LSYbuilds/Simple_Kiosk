@@ -290,7 +290,6 @@ export const DeliveryInner = styled.section`
       border-radius: 20px;
       box-sizing: border-box;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-
       .data_title {
         margin-bottom: 24px;
         font-size: 20px;
@@ -302,7 +301,6 @@ export const DeliveryInner = styled.section`
         gap: 40px;
         padding-bottom: 32px;
         border-bottom: 1px solid #e8e8e8;
-
         .boo_img {
           flex: 0 0 260px;
           display: flex;
@@ -468,7 +466,6 @@ export const DeliveryInner = styled.section`
       .boo_detail_info_box {
         padding: 32px 0;
         border-bottom: 1px solid #e8e8e8;
-
         .detail_btn {
           padding: 10px 18px;
           border: 0;
@@ -479,16 +476,13 @@ export const DeliveryInner = styled.section`
           font-weight: 600;
           cursor: pointer;
         }
-
         .boo_datial_text {
           margin-top: 30px;
-
           .boo_dese {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-bottom: 35px;
-
             p {
               margin: 0;
               color: #555;
@@ -558,23 +552,23 @@ export const DeliveryInner = styled.section`
             font-weight: 700;
             color: #222;
           }
-
           .stats_list {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-
             li {
               display: flex;
+              flex-direction: column;
               align-items: center;
               justify-content: center;
               min-height: 70px;
               border-radius: 12px;
-              background: #f7f7f8;
-
+              div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              }
               svg {
                 width: 30px;
                 height: 30px;
@@ -756,65 +750,56 @@ export const DeliveryInner = styled.section`
   // 모바일
   // ========================================
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     padding: 30px 16px 60px;
-
     .inner_title {
       margin-bottom: 20px;
       font-size: 26px;
     }
-
     .flex_row {
       gap: 20px;
-    }
-
-    .booData_box {
-      padding: 20px;
-      border-radius: 14px;
-
-      .boo_basic_info {
-        flex-direction: column;
-
-        .boo_img {
-          flex-basis: auto;
-          min-height: 250px;
-
-          img {
-            width: 150px;
-            height: 150px;
-          }
-        }
-
-        .boo_datail {
-          .boo_title {
-            .boo_ko_name {
-              font-size: 28px;
+      .booData_box {
+        padding: 20px;
+        border-radius: 14px;
+        .boo_basic_info {
+          flex-direction: column;
+          .boo_img {
+            flex-basis: auto;
+            min-height: 250px;
+            img {
+              width: 150px;
+              height: 150px;
             }
           }
-
-          .boo_price_box {
-            .price {
-              font-size: 24px;
+          .boo_datail {
+            .boo_title {
+              .boo_ko_name {
+                font-size: 28px;
+              }
+            }
+            .boo_price_box {
+              .price {
+                font-size: 24px;
+              }
             }
           }
         }
-      }
+        .boo_detail_info_box {
+          .skills_box {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+          }
+          .stats_box {
+            .stats_list {
+              grid-template-columns: repeat(4, 1fr);
+            }
+          }
+        }
 
-      .boo_detail_info_box {
-        .skills_box {
+        .user_info_option {
           grid-template-columns: 1fr;
+          gap: 25px;
         }
-
-        .stats_box {
-          .stats_list {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-      }
-
-      .user_info_option {
-        grid-template-columns: 1fr;
-        gap: 25px;
       }
     }
 

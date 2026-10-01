@@ -35,6 +35,7 @@ const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
   const [core, setCore] = useState(null);
   // 부 갯수
   const [countNum, setCountNum] = useState(1);
+  const [detailInfo, setDetailInfo] = useState(false);
   // 최종주문데이터 모달
   const [confirmModal, setConfirmModal] = useState(false);
   const navigate = useNavigate();
@@ -397,12 +398,10 @@ const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
                           <Icon.sword />
                           <p>액티브</p>
                         </div>
-
                         <div className="skills_info">
                           {orderBooData.skills.active}
                         </div>
                       </div>
-
                       <div className="passive_skills">
                         <div className="icon">
                           <Icon.shield />
@@ -419,19 +418,35 @@ const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
 
                       <ul className="stats_list">
                         <li>
-                          <Icon.attack />
+                          <div>
+                            <Icon.attack />
+                            <p>공격력</p>
+                            <p>{orderBooData.stats.attack}</p>
+                          </div>
                         </li>
 
                         <li>
-                          <Icon.support />
+                          <div>
+                            <Icon.support />
+                            <p>지원</p>
+                            <p>{orderBooData.stats.support}</p>
+                          </div>
                         </li>
 
                         <li>
-                          <Icon.speed />
+                          <div>
+                            <Icon.speed />
+                            <p>속도</p>
+                            <p>{orderBooData.stats.speed}</p>
+                          </div>
                         </li>
 
                         <li>
-                          <Icon.defense />
+                          <div>
+                            <Icon.defense />
+                            <p>방어</p>
+                            <p>{orderBooData.stats.defense}</p>
+                          </div>
                         </li>
                       </ul>
                     </div>
