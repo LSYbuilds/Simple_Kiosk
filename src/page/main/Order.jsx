@@ -14,10 +14,6 @@ const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
   // 네비게이트
   const navigate = useNavigate();
   // 주문 데이터가 없으면 바로 메인으로
-  if (!buybooData) {
-    navigate("/main", { replace: true });
-    return null;
-  }
   const boodata = buybooData;
   // 부데이터 전부
   const [orderBooData, setOrderBooData] = useState(boodata);

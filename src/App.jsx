@@ -8,13 +8,24 @@ import Intro from "./page/intro/Intro";
 import Main from "./page/main/Main";
 import Order from "./page/main/Order";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OrderConfirm from "./page/main/OrderConfirm";
 
 function App() {
   const [faction, setFaction] = useState([]);
-  const [buybooData, setBuybooData] = useState(null);
+  const [buybooData, setBuybooData] = useState(() => {
+    const savedData = sessionStorage.getItem("buybooData");
+
+    return savedData ? JSON.parse(savedData) : null;
+  });
   const [finalOrder, setFinalOrder] = useState({});
+  useEffect(() => {
+    if (buybooData) {
+      sessionStorage.setItem("buybooData", JSON.stringify(buybooData));
+    } else {
+      sessionStorage.removeItem("buybooData");
+    }
+  }, [buybooData]);
   return (
     <Wrap>
       <Routes>
