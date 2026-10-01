@@ -21,13 +21,17 @@ const OrderConfirm = ({ faction, finalOrder }) => {
   const handleNewOrder = () => {
     navigate("/");
   };
+
+  const publicPath = (path) => {
+    return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+  };
   return (
     <OrderConfirmWrap>
       <div className="inner">
         <div className="order_title">주문이 완료되었습니다.</div>
         <div className="order_item_box">
           <div className="boo_img">
-            <img src={finalOrder.booimg} alt="부이미지" />
+            <img src={publicPath(finalOrder.booimg)} alt="부이미지" />
           </div>
           <div className="order_info_box">
             <p className="boo_name">{finalOrder.booname}</p>

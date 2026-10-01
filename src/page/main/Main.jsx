@@ -15,6 +15,10 @@ const Main = ({ faction, setBuybooData }) => {
   const [saleboo, setSaleboo] = useState([]);
 
   const navigate = useNavigate();
+  // 정규식
+  const publicPath = (path) => {
+    return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+  };
   // const saleData = booData.bangbooList.map((item) => ({
   //   ...item,
   //   salePrice:
@@ -201,7 +205,7 @@ const Main = ({ faction, setBuybooData }) => {
                     }}
                   >
                     <div className="sale_boo_img">
-                      <img src={item.src} alt="" />
+                      <img src={publicPath(item.src)} alt="" />
                     </div>
                     <div className="sale_boo_name">{item.name}</div>
                   </SwiperSlide>
@@ -221,7 +225,7 @@ const Main = ({ faction, setBuybooData }) => {
                 <div
                   className={`boo_img ${item.rarity === 5 ? "gold" : "pup"}`}
                 >
-                  <img src={item.src} alt="bangboo 이미지" />
+                  <img src={publicPath(item.src)} alt="bangboo 이미지" />
                   <span className="eng_name">{item.id}</span>
                 </div>
                 <div className="boo_desc">
@@ -293,7 +297,7 @@ const Main = ({ faction, setBuybooData }) => {
               >
                 <div className="basicInfo_box">
                   <div className="boo_img_box">
-                    <img src={thisBoo.src} alt="" />
+                    <img src={publicPath(thisBoo.src)} alt="" />
                   </div>
 
                   <div className="boo_info_box">

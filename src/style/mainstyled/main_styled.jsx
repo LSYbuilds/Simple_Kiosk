@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
 import { motion } from "motion/react";
+
+const publicPath = (path) => {
+  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+};
+
 export const MainWrap = styled.div`
   width: 100%;
   height: 100%;
@@ -49,7 +54,7 @@ export const MainWrap = styled.div`
             rgba(0, 0, 0, 0.15) 60%,
             rgba(0, 0, 0, 0) 100%
           ),
-          url("/banner/banner1.webp");
+          url(${publicPath("/banner/banner1.webp")});
 
         background-repeat: no-repeat;
         background-size: cover;

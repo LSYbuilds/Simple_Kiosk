@@ -25,6 +25,9 @@ const Intro = ({ setFaction }) => {
       navigate("/main");
     }
   };
+  const publicPath = (path) => {
+    return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+  };
   return (
     <IntroWrap>
       <div className="inner">
@@ -173,7 +176,7 @@ const Intro = ({ setFaction }) => {
         )}
         <section className="intro_section">
           <h1 className="logo">
-            <img src="/logo_b.png" alt="로고" />
+            <img src={publicPath("/logo_b.png")} alt="로고" />
           </h1>
         </section>
         <section className="select_section">

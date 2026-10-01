@@ -38,6 +38,11 @@ const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
   // 최종주문데이터 모달
   const [confirmModal, setConfirmModal] = useState(false);
   const navigate = useNavigate();
+  // 정규식
+  const publicPath = (path) => {
+    return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+  };
+
   const deliveryOption = [
     {
       id: "1",
@@ -319,7 +324,7 @@ const Order = ({ buybooData, setBuybooData, finalOrder, setFinalOrder }) => {
                     <div
                       className={`boo_img_box ${orderBooData.rarity === 5 ? "gold" : "pup"}`}
                     >
-                      <img src={orderBooData.src} alt="" />
+                      <img src={publicPath(orderBooData.src)} alt="" />
                     </div>
                     <div className="boo_img_text">
                       <p className="img_boo_enb_name">{orderBooData.id}</p>
