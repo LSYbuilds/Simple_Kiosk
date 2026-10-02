@@ -197,7 +197,24 @@ const Main = ({ faction, setBuybooData }) => {
           ) : (
             <div className="sale_list_box">
               <p className="sale_title">현재 할인중인 BANGBOO</p>
-              <SaleBooSwiper slidesPerView={8} spaceBetween={8}>
+              <SaleBooSwiper
+                slidesPerView={3}
+                spaceBetween={8}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 3,
+                  },
+                  480: {
+                    slidesPerView: 3,
+                  },
+                  768: {
+                    slidesPerView: 7,
+                  },
+                  1024: {
+                    slidesPerView: 10,
+                  },
+                }}
+              >
                 {saleboo.map((item, idx) => (
                   <SwiperSlide
                     key={idx}
