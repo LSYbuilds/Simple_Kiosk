@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IntroWrap } from "../../style/introstyled/intro_styled";
 import Icon from "../../components/SvgComponents";
+import BooInfo from "../../assets/data/bangbooInfoData.json";
+import { AnimatePresence, motion, time } from "motion/react";
 const Intro = ({ setFaction }) => {
+  const BooInfoData = BooInfo.bangbooInfo;
   const [member, setMember] = useState(false);
+  const [booInfoDataSet, setBooInfoDataSet] = useState(
+    BooInfoData.characteristicList,
+  );
+  const [openBangbooInfo, setOpenBangbooInfo] = useState(false);
   const [select, setSelect] = useState("");
   const [factionNumber, setfactionNumber] = useState("");
   const [factionName, setFactionName] = useState("");
@@ -31,115 +38,86 @@ const Intro = ({ setFaction }) => {
   const publicPath = (path) => {
     return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
   };
+  console.log(booInfoDataSet);
   return (
     <IntroWrap>
       <div className="inner">
+        {openBangbooInfo && (
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="bangboo_info_modal"
+              onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                  setOpenBangbooInfo(false);
+                }
+              }}
+            >
+              <div className="bangboo_info_inner">
+                <div className="close_btn">
+                  <Icon.close
+                    onClick={(e) => {
+                      if (e.target === e.currentTarget) {
+                        setOpenBangbooInfo(false);
+                      }
+                    }}
+                  />
+                </div>
+                <div className="info_text_box">
+                  <ul className="category">
+                    <li
+                      onClick={() =>
+                        setBooInfoDataSet(BooInfoData.characteristicList)
+                      }
+                    >
+                      소개
+                    </li>
+                    <li onClick={() => setBooInfoDataSet(BooInfoData.lang)}>
+                      언어
+                    </li>
+                    <li onClick={() => setBooInfoDataSet(BooInfoData.standing)}>
+                      사회적 지휘
+                    </li>
+                    <li onClick={() => setBooInfoDataSet(BooInfoData.ecology)}>
+                      생태
+                    </li>
+                  </ul>
+                  <div className="info_show_box">
+                    <div className="boo_img">
+                      <img
+                        src={publicPath(booInfoDataSet.img)}
+                        alt="부이미지"
+                      />
+                    </div>
+                    <ul className="boo_script">
+                      {booInfoDataSet.list.map((item) => (
+                        <li key={item.id}>{item.text}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        )}
         {member && (
-          <div
-            className="member_modal"
-            onClick={(e) => {
-              if (e.target === e.currentTarget) {
-                setMember(false);
-              }
-            }}
-          >
-            {select === "proxy" ? (
-              <div className="modal_inner">
-                <div className="close_btn">
-                  <Icon.close
-                    onClick={(e) => {
-                      if (e.target === e.currentTarget) {
-                        setMember(false);
-                      }
-                    }}
-                  />
-                </div>
-                <div className="title_text">
-                  <p className="select_faction">{factionName}</p>
-                  <div className="notice">
-                    <Icon.notice />
-                    <p>로스캘리퍼 공식인증 프록시 고유번호를 입력해주세요</p>
-                  </div>
-                  <div className="input_box">
-                    <input type="text" placeholder="고유번호" />
-                  </div>
-                </div>
-                <div className="mamber_select">
-                  <button
-                    type="button"
-                    className="non_member"
-                    onClick={() => handlesubmit()}
-                  >
-                    확인
-                  </button>
-                </div>
-              </div>
-            ) : select === "public" ? (
-              <div className="modal_inner">
-                <div className="close_btn">
-                  <Icon.close
-                    onClick={(e) => {
-                      if (e.target === e.currentTarget) {
-                        setMember(false);
-                      }
-                    }}
-                  />
-                </div>
-                <div className="title_text">
-                  <p className="select_faction">{factionName}</p>
-                  <div className="notice">
-                    <Icon.notice />
-                    <p>공무원 번호를 입력해주세요</p>
-                  </div>
-                  <div className="input_box">
-                    <input type="text" placeholder="고유번호" />
-                  </div>
-                </div>
-
-                <div className="mamber_select">
-                  <button
-                    type="button"
-                    className="non_member"
-                    onClick={() => handlesubmit()}
-                  >
-                    확인
-                  </button>
-                </div>
-              </div>
-            ) : select === "private" ? (
-              <div className="modal_inner">
-                <div className="close_btn">
-                  <Icon.close
-                    onClick={(e) => {
-                      if (e.target === e.currentTarget) {
-                        setMember(false);
-                      }
-                    }}
-                  />
-                </div>
-                <div className="title_text">
-                  <p className="select_faction">{factionName}</p>
-                  <div className="notice">
-                    <Icon.notice />
-                    <p>사업자 등록번호를 입력해주세요</p>
-                  </div>
-                  <div className="input_box">
-                    <input type="text" placeholder="고유번호" />
-                  </div>
-                </div>
-
-                <div className="mamber_select">
-                  <button
-                    type="button"
-                    className="non_member"
-                    onClick={() => handlesubmit()}
-                  >
-                    확인
-                  </button>
-                </div>
-              </div>
-            ) : (
-              select === "non" && (
+          <AnimatePresence>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="member_modal"
+              onClick={(e) => {
+                if (e.target === e.currentTarget) {
+                  setMember(false);
+                }
+              }}
+            >
+              {select === "proxy" ? (
                 <div className="modal_inner">
                   <div className="close_btn">
                     <Icon.close
@@ -154,32 +132,129 @@ const Intro = ({ setFaction }) => {
                     <p className="select_faction">{factionName}</p>
                     <div className="notice">
                       <Icon.notice />
-                      <p>
-                        회원등록을 하시는 경우 할인 혜택을 받을 수 있습니다.
-                      </p>
+                      <p>로스캘리퍼 공식인증 프록시 고유번호를 입력해주세요</p>
+                    </div>
+                    <div className="input_box">
+                      <input type="text" placeholder="고유번호" />
+                    </div>
+                  </div>
+                  <div className="mamber_select">
+                    <button
+                      type="button"
+                      className="non_member"
+                      onClick={() => handlesubmit()}
+                    >
+                      확인
+                    </button>
+                  </div>
+                </div>
+              ) : select === "public" ? (
+                <div className="modal_inner">
+                  <div className="close_btn">
+                    <Icon.close
+                      onClick={(e) => {
+                        if (e.target === e.currentTarget) {
+                          setMember(false);
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="title_text">
+                    <p className="select_faction">{factionName}</p>
+                    <div className="notice">
+                      <Icon.notice />
+                      <p>공무원 번호를 입력해주세요</p>
+                    </div>
+                    <div className="input_box">
+                      <input type="text" placeholder="고유번호" />
                     </div>
                   </div>
 
                   <div className="mamber_select">
                     <button
                       type="button"
-                      className="member"
-                      onClick={() => handleSignin()}
+                      className="non_member"
+                      onClick={() => handlesubmit()}
                     >
-                      회원가입
+                      확인
                     </button>
+                  </div>
+                </div>
+              ) : select === "private" ? (
+                <div className="modal_inner">
+                  <div className="close_btn">
+                    <Icon.close
+                      onClick={(e) => {
+                        if (e.target === e.currentTarget) {
+                          setMember(false);
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="title_text">
+                    <p className="select_faction">{factionName}</p>
+                    <div className="notice">
+                      <Icon.notice />
+                      <p>사업자 등록번호를 입력해주세요</p>
+                    </div>
+                    <div className="input_box">
+                      <input type="text" placeholder="고유번호" />
+                    </div>
+                  </div>
+
+                  <div className="mamber_select">
                     <button
                       type="button"
                       className="non_member"
                       onClick={() => handlesubmit()}
                     >
-                      비회원으로 계속
+                      확인
                     </button>
                   </div>
                 </div>
-              )
-            )}
-          </div>
+              ) : (
+                select === "non" && (
+                  <div className="modal_inner">
+                    <div className="close_btn">
+                      <Icon.close
+                        onClick={(e) => {
+                          if (e.target === e.currentTarget) {
+                            setMember(false);
+                          }
+                        }}
+                      />
+                    </div>
+                    <div className="title_text">
+                      <p className="select_faction">{factionName}</p>
+                      <div className="notice">
+                        <Icon.notice />
+                        <p>
+                          회원등록을 하시는 경우 할인 혜택을 받을 수 있습니다.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mamber_select">
+                      <button
+                        type="button"
+                        className="member"
+                        onClick={() => handleSignin()}
+                      >
+                        회원가입
+                      </button>
+                      <button
+                        type="button"
+                        className="non_member"
+                        onClick={() => handlesubmit()}
+                      >
+                        비회원으로 계속
+                      </button>
+                    </div>
+                  </div>
+                )
+              )}
+            </motion.div>
+          </AnimatePresence>
         )}
         <section className="intro_section">
           <h1 className="logo">
@@ -187,7 +262,16 @@ const Intro = ({ setFaction }) => {
           </h1>
         </section>
         <section className="select_section">
-          <div className="head_text">회원유형을 선택해주세요</div>
+          <div className="head_text">
+            <p>BANGBOO 키오스크에 오신 것을 환영합니다.</p>
+            <p>이용하실 회원 유형을 선택해주세요</p>
+          </div>
+          <div
+            className="quote_btn_box"
+            onClick={() => setOpenBangbooInfo(true)}
+          >
+            <Icon.notice /> <span>BANGBOO란?</span>
+          </div>
           <div className="faction_list">
             <div className="faction_name">
               <Link
