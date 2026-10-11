@@ -963,6 +963,43 @@
       "remoteIcon": "https://img.game8.co/3926077/192ef00c8c8c01df112d025df163a8f7.png/show"
     },
     {
+      "id": "godoilboo",
+      "src": "/bangboo/GodOilBoo.png",
+      "price": 671000,
+      "name": "신유부",
+      "englishName": "godoilboo",
+      "rarity": 4,
+      "element": "방어",
+      "faction": "직장인 연합",
+      "saleFaction": "private",
+      "mbti": "INFP",
+      "compatibleMbti": ["INFP", "ISFP", "ENFP", "INFJ"],
+      "tier": "Tier 2",
+      "title": "게슴츠레 신경질적인 성격",
+      "quote": "웅-나... 또 뭐 할려고 뭐.",
+      "shortDesc": "트렌디한 패션 디자인이면서도 아닌 평범한 룩을 가진 방부",
+      "description": "귀찮은 듯한 가벼운 몸짓과 게슴츠레한 눈망울을 가진 귀차니즘 파 방부입니다. 상처받기 쉬운 여린 마음을 가졌지만, 집사를 지킬 때는 도망칠 수도 있습니다",
+      "personality": "순수하고 낭만적이며, 게임을 많이 하고 싶은 성격입니다",
+      "skills": {
+        "active": "신결질 공격: 큰 노이즈의 사자후로 주위 적을 기절시킵니다.",
+        "passive": "가벼운 날갯짓: 아군의 회피 쿨타임 감소 및 이동속도 증가"
+      },
+      "stats": {
+        "attack": 50,
+        "support": 82,
+        "speed": 85,
+        "defense": 82
+      },
+      "iconColor": "#93c5fd",
+      "tags": ["#종이비행기", "#순수감성", "#수호방패", "#낭만파"],
+      "svgType": "paperboo",
+      "imageKey": "Paperboo",
+      "image": "/images/bangboo/paperboo_full.png",
+      "iconImage": "/images/bangboo/paperboo_icon.png",
+      "remoteImage": "https://img.game8.co/3926095/b476dd221ff6d1b30791d69dccbba089.png/show",
+      "remoteIcon": "https://img.game8.co/3926077/192ef00c8c8c01df112d025df163a8f7.png/show"
+    },
+    {
       "id": "electroboo",
       "src": "/bangboo/Electroboo.webp",
       "price": 568000,
